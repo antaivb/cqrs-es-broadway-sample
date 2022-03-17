@@ -8,18 +8,22 @@ use App\Application\Command\Shared\CommandHandlerInterface;
 use App\Domain\User\Model\User;
 use App\Domain\User\Model\ValueObject\UserId;
 use App\Domain\User\Repository\UserRepositoryInterface;
+use App\Domain\User\Repository\UserStoreRepositoryInterface;
 use App\Domain\User\Specification\UniqueEmailSpecificationInterface;
 
 final class SignUpCommandHandler implements CommandHandlerInterface
 {
     private UserRepositoryInterface $userRepository;
+    private UserStoreRepositoryInterface $userStoreRepository;
     private UniqueEmailSpecificationInterface $uniqueEmailSpecification;
 
     public function __construct(
         UniqueEmailSpecificationInterface $uniqueEmailSpecification,
-        UserRepositoryInterface $userRepository
+        UserRepositoryInterface $userRepository,
+        UserStoreRepositoryInterface $userStoreRepository
     ) {
         $this->uniqueEmailSpecification = $uniqueEmailSpecification;
+        $this->userStoreRepository = $userStoreRepository;
         $this->userRepository = $userRepository;
     }
 
@@ -27,11 +31,12 @@ final class SignUpCommandHandler implements CommandHandlerInterface
     {
         $user = User::create(
             UserId::generate(),
-            $command->getName(),
-            $command->getCredentials(),
+            $command->name(),
+            $command->credentials(),
             $this->uniqueEmailSpecification
         );
 
+        $this->userStoreRepository->store($user);
         $this->userRepository->save($user);
     }
 }

@@ -27,12 +27,12 @@ final class SignUpCommand implements CommandInterface
         $this->credentials = new Credentials($email, $hashedPassword);
     }
 
-    public function getName(): Name
+    public function name(): Name
     {
         return $this->name;
     }
 
-    public function getCredentials(): Credentials
+    public function credentials(): Credentials
     {
         return $this->credentials;
     }

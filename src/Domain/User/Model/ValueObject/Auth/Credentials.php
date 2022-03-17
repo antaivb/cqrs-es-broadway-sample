@@ -17,12 +17,12 @@ class Credentials
         $this->password = $password;
     }
 
-    public function getEmail(): Email
+    public function email(): Email
     {
         return $this->email;
     }
 
-    public function getPassword(): HashedPassword
+    public function password(): HashedPassword
     {
         return $this->password;
     }

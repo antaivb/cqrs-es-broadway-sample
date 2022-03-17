@@ -10,6 +10,9 @@ services:
         autowire: true
         autoconfigure: true
         public: false
+        bind:
+            $eventBus: '@broadway.event_handling.event_bus'
+            $eventStore: '@Broadway\EventStore\Dbal\DBALEventStore'
 
     _instanceof:
         App\Application\Command\Shared\CommandHandlerInterface:
@@ -52,3 +55,4 @@ services:
     ### Repositories
     
     App\Domain\User\Repository\UserRepositoryInterface: '@App\Infrastructure\User\Repository\UserRepository'
+    App\Domain\User\Repository\UserStoreRepositoryInterface: '@App\Infrastructure\User\Repository\UserStoreRepository'
