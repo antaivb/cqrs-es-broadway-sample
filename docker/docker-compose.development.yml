@@ -1,0 +1,20 @@
+version: "3"
+services:
+  mysql:
+    container_name: app-mysql-development
+    image: mysql:5.7.12
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=app
+    volumes:
+      - ../etc/build/config/mysql/:/etc/mysql/conf.d
+      - app-mysql-dev:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - app_development
+
+networks:
+    app_development:
+volumes:
+    app-mysql-dev:

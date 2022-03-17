@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        tags: ['doctrine.fixture.orm']
+        autowire: true
+    
+    App\Infrastructure\Shared\Persistence\Doctrine\Fixture\:
+        resource: '../../../src/Infrastructure/Shared/Persistence/Doctrine/Fixture/*'

@@ -1,0 +1,7 @@
+kernel:
+    resource: ../../src/Infrastructure/Kernel.php
+    type: annotation
+
+api_controllers:
+    resource: ../../src/Ports/Http/Rest/Controller/
+    type: annotation

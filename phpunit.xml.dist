@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- https://phpunit.readthedocs.io/en/latest/configuration.html -->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         backupGlobals="false"
+         colors="true"
+         bootstrap="tests/bootstrap.php"
+>
+    <php>
+        <ini name="error_reporting" value="-1" />
+        <server name="APP_ENV" value="test" force="true" />
+        <server name="SHELL_VERBOSITY" value="-1" />
+
+        <!-- ###+ symfony/framework-bundle ### -->
+        <env name="APP_ENV" value="dev"/>
+        <env name="APP_SECRET" value="6c64fb097765374ca41c14cc3b5117f8"/>
+        <!-- ###- symfony/framework-bundle ### -->
+
+        <!-- ###+ doctrine/doctrine-bundle ### -->
+        <!-- Format described at https://www.doctrine-project.org/projects/doctrine-dbal/en/latest/reference/configuration.html#connecting-using-a-url -->
+        <!-- IMPORTANT: You MUST configure your server version, either here or in config/packages/doctrine.yaml -->
+        <!--  -->
+        <!-- DATABASE_URL="sqlite:///%kernel.project_dir%/var/data.db" -->
+        <!-- DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=5.7&charset=utf8mb4" -->
+        <env name="DATABASE_URL" value="postgresql://db_user:db_password@127.0.0.1:5432/db_name?serverVersion=13&amp;charset=utf8"/>
+        <!-- ###- doctrine/doctrine-bundle ### -->
+        <!-- ###+ nelmio/cors-bundle ### -->
+        <env name="CORS_ALLOW_ORIGIN" value="'^https?://(localhost|127\.0\.0\.1)(:[0-9]+)?$'"/>
+        <!-- ###- nelmio/cors-bundle ### -->
+    </php>
+
+    <testsuites>
+        <testsuite name="Unit">
+            <directory>tests/Unit</directory>
+        </testsuite>
+        <testsuite name="Integration">
+            <directory>tests/Integration</directory>
+        </testsuite>
+        <testsuite name="EndToEnd">
+            <directory>tests/EndToEnd</directory>
+        </testsuite>
+    </testsuites>
+
+    <coverage processUncoveredFiles="true">
+        <include>
+            <directory suffix=".php">src</directory>
+        </include>
+    </coverage>
+</phpunit>

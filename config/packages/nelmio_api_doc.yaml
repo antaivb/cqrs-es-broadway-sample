@@ -1,0 +1,22 @@
+nelmio_api_doc:
+    documentation:
+        servers:
+            - url: http://api-production.app.com
+              description: API over HTTP
+            - url: https://api-production.app.com
+              description: API over HTTPS
+        info:
+            title: App
+            description:  API Rest
+            version: 1.0.0
+        components:
+            securitySchemes:
+                Bearer:
+                    type: http
+                    scheme: bearer
+                    bearerFormat: JWT
+        security:
+            - Bearer: []
+    areas:
+        path_patterns:
+            - ^/(?!doc$)(?!_) # Accepts routes under / except /doc

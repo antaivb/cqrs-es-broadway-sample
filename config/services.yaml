@@ -1,0 +1,50 @@
+parameters:
+    exception_to_status:
+        InvalidArgumentException: 400
+        App\Domain\User\Exception\InvalidCredentialsException: 401
+        App\Domain\User\Exception\ForbiddenException: 403
+        App\Domain\User\Exception\EmailAlreadyExistException: 403
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    _instanceof:
+        App\Application\Command\Shared\CommandHandlerInterface:
+            public: true
+            tags:
+                - { name: messenger.message_handler, bus: messenger.bus.command }
+    
+        App\Application\Query\Shared\QueryHandlerInterface:
+            public: true
+            tags:
+                - { name: messenger.message_handler, bus: messenger.bus.query }
+    
+    App\:
+        resource: '../src/*'
+        exclude: '../src/Infrastructure/Shared/Persistence/Doctrine/Migration/*'
+
+    App\Infrastructure\Shared\Bus\Command\MessengerCommandBus:
+        arguments:
+            - '@messenger.bus.command'
+
+    App\Infrastructure\Shared\Bus\Query\MessengerQueryBus:
+        arguments:
+            - '@messenger.bus.query'
+
+    ### PORTS
+    
+    App\Ports\Http\Rest\Controller\:
+        resource: '../src/Ports/Http/Rest/Controller/*'
+        tags: [ 'controller.service_arguments' ]
+        
+    ### UI Listeners
+
+    App\Ports\Http\Rest\EventSubscriber\ExceptionSubscriber:
+        arguments:
+            - "%kernel.environment%"
+            - "%exception_to_status%"
+        tags:
+            - { name: 'kernel.event_listener', event: 'kernel.exception' }
