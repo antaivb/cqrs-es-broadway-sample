@@ -9,6 +9,11 @@ doctrine:
         server_version: 5.7
         charset: UTF8
         schema_filter: ~^(?!fos_)~
+        types:
+            user_id: App\Infrastructure\User\Persistence\Doctrine\Type\UserIdType
+            name: App\Infrastructure\Shared\Persistence\Doctrine\Type\NameType
+            creation_date: App\Infrastructure\Shared\Persistence\Doctrine\Type\CreationDateType
+            email: App\Infrastructure\Shared\Persistence\Doctrine\Type\EmailType
 
     orm:
         auto_generate_proxy_classes: true
@@ -21,9 +26,3 @@ doctrine:
                 dir: '%kernel.project_dir%/config/packages/doctrine/mapping/domain'
                 prefix: 'App\Domain'
                 alias: Domain
-            Projections:
-                is_bundle: false
-                type: xml
-                dir: '%kernel.project_dir%/config/packages/doctrine/mapping/projection'
-                prefix: 'App\Infrastructure'
-                alias: Projection

@@ -28,6 +28,11 @@ class CreationDate implements \JsonSerializable
         return new self(new \DateTime($date));
     }
 
+    public static function now(): self
+    {
+        return new self(new \DateTime());
+    }
+
     /**
      * @throws AssertionFailedException
      */
