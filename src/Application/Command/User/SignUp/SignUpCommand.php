@@ -21,7 +21,6 @@ final class SignUpCommand implements CommandInterface
         string $plainPassword,
     ) {
         $this->name = Name::fromString($name);
-
         $email = Email::fromString($email);
         $hashedPassword = HashedPassword::encode($plainPassword);
         $this->credentials = new Credentials($email, $hashedPassword);

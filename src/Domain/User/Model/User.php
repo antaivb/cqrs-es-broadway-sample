@@ -42,7 +42,7 @@ class User extends EventSourcedAggregateRoot
         return $user;
     }
 
-    public function applyUserWasCreated(UserWasCreated $userWasCreated): void
+    protected function applyUserWasCreated(UserWasCreated $userWasCreated): void
     {
         $this->id = $userWasCreated->id();
         $this->name = $userWasCreated->name();

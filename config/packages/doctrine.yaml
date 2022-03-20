@@ -26,3 +26,9 @@ doctrine:
                 dir: '%kernel.project_dir%/config/packages/doctrine/mapping/domain'
                 prefix: 'App\Domain'
                 alias: Domain
+            Projections:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/config/packages/doctrine/mapping/projection'
+                prefix: 'App\Infrastructure'
+                alias: Projection

@@ -8,7 +8,6 @@ use Assert\Assertion;
 use Assert\AssertionFailedException;
 use OpenApi\Annotations as OA;
 use App\Application\Command\User\SignUp\SignUpCommand;
-use App\Domain\User\Exception\InvalidCredentialsException;
 use App\Ports\Http\Rest\Controller\CommandQueryController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,7 +25,6 @@ final class SignUpController extends CommandQueryController
      *
      * @OA\Tag(name="User")
      * @throws AssertionFailedException
-     * @throws InvalidCredentialsException
      * @throws Throwable
      */
     public function create(Request $request): JsonResponse
@@ -34,25 +32,12 @@ final class SignUpController extends CommandQueryController
         $name = $request->get('_name');
         $email = $request->get('_email');
         $password = $request->get('_password');
-        $city = $request->get('_city');
-        $gender = $request->get('_gender');
-        $phone = $request->get('_phone');
-        $dateBirth = $request->get('_dateBirth');
-        $couple = $request->get('_couple');
-        $childSurname = $request->get('_childSurname');
 
-        Assertion::notNull($name, 'Name can\'t be null');
-        Assertion::notNull($email, 'Email can\'t be null');
-        Assertion::notNull($password, 'Password can\'t be null');
-        Assertion::notNull($city, 'City can\'t be null');
-        Assertion::notNull($gender, 'Gender can\'t be null');
-        Assertion::nullOrString($phone, 'Phone can\'t be null');
-        Assertion::nullOrString($dateBirth, 'Date Birth can\'t be null');
-        Assertion::nullOrString($couple, 'Couple can\'t be null');
-        Assertion::nullOrString($childSurname, 'Child Surname can\'t be null');
+        Assertion::notNull($name, 'Name can not be null');
+        Assertion::notNull($email, 'Email can not be null');
+        Assertion::notNull($password, 'Password can not be null');
 
-        $this->handle(new SignUpCommand($name, $email, $password, $gender, $phone, $dateBirth, $couple, $childSurname));
-
+        $this->handle(new SignUpCommand($name, $email, $password));
         return $this->jsonResponse(['user' => $email]);
     }
 }

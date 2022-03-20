@@ -13,11 +13,11 @@
 
 namespace App\Domain\User\Repository;
 
-use App\Domain\User\Model\User;
+use App\Infrastructure\User\ReadModel\UserView;
 
 interface UserRepositoryInterface
 {
-    public function save(User $user): void;
+    public function save(UserView $user): void;
 
-    public function findByEmail(string $userEmail): ?User;
+    public function findByEmail(string $userEmail): ?UserView;
 }

@@ -54,5 +54,10 @@ services:
 
     ### Repositories
     
-    App\Domain\User\Repository\UserRepositoryInterface: '@App\Infrastructure\User\Repository\UserRepository'
+    App\Domain\User\Repository\UserRepositoryInterface: '@App\Infrastructure\User\ReadModel\Repository\UserRepository'
     App\Domain\User\Repository\UserStoreRepositoryInterface: '@App\Infrastructure\User\Repository\UserStoreRepository'
+
+    ### Projection
+    App\Infrastructure\User\ReadModel\Projection\:
+        resource: '../src/Infrastructure/User/ReadModel/Projection/*'
+        tags: [ 'broadway.domain.event_listener' ]
