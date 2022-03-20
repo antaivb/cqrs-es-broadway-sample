@@ -1,0 +1,6 @@
+broadway:
+    event_store: 'Broadway\EventStore\Dbal\DBALEventStore'
+
+services:
+    Broadway\EventStore\EventStore: '@broadway.event_store'
+    Broadway\EventHandling\EventBus: '@broadway.event_handling.event_bus'
