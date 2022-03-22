@@ -23,6 +23,8 @@ class User extends EventSourcedAggregateRoot
     private HashedPassword $hashedPassword;
     private CreationDate $creationDate;
 
+    protected function __construct() {}
+
     public static function create(
         UserId $id,
         Name $name,
@@ -32,7 +34,7 @@ class User extends EventSourcedAggregateRoot
         $uniqueEmailSpecification->isUnique($credentials->email());
 
         $user = new self();
-        $user->apply(new UserWasCreated(
+        $user->apply(UserWasCreated::withData(
             $id,
             $name,
             $credentials,

@@ -16,7 +16,7 @@ class HashedPassword
     public const COST = 12;
     public const MIN_CHARACTERS = 6;
 
-    public function __construct(string $hashedPassword)
+    protected function __construct(string $hashedPassword)
     {
         $this->hashedPassword = $hashedPassword;
     }

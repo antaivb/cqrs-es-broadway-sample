@@ -10,7 +10,7 @@ abstract class AggregateRootId
 {
     protected string $id;
 
-    public function __construct(string $id)
+    protected function __construct(string $id)
     {
         Assertion::uuid($id, 'This is not valid uuid');
         $this->id = $id;

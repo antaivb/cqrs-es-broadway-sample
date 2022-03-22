@@ -7,6 +7,7 @@ namespace App\Ports\Http\Rest\Controller;
 use App\Application\Query\Shared\QueryBusInterface;
 use App\Application\Query\Shared\QueryInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Throwable;
 
@@ -29,7 +30,7 @@ abstract class QueryController
         return $this->queryBus->ask($query);
     }
 
-    public function jsonResponse(array $data, ?int $httpStatus = JsonResponse::HTTP_OK): JsonResponse
+    public function jsonResponse(array $data, ?int $httpStatus = Response::HTTP_OK): JsonResponse
     {
         return new JsonResponse(
             json_encode($data),

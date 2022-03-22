@@ -23,17 +23,23 @@ class UserView implements SerializableReadModel
     private CreationDate $creationDate;
     private HashedPassword $hashedPassword;
 
-    #[Pure] public function __construct(
+    protected function __construct() {}
+
+    public static function withData(
         UserId $id,
         Name $name,
         Credentials $credentials,
         CreationDate $creationDate,
-    ) {
-        $this->id = $id;
-        $this->name = $name;
-        $this->creationDate = $creationDate;
-        $this->hashedPassword = $credentials->password();
-        $this->email = $credentials->email();
+    ): UserView {
+        $user = new self();
+
+        $user->id = $id;
+        $user->name = $name;
+        $user->creationDate = $creationDate;
+        $user->hashedPassword = $credentials->password();
+        $user->email = $credentials->email();
+
+        return $user;
     }
 
     public function id(): UserId
@@ -73,7 +79,7 @@ class UserView implements SerializableReadModel
 
     public static function deserialize(array $data): UserView
     {
-        return new self(
+        return self::withData(
             UserId::fromString($data['id']),
             Name::fromString($data['name']),
             new Credentials(Email::fromString($data['email']), HashedPassword::fromHash($data['hashedPassword'])),

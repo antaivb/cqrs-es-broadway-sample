@@ -5,20 +5,16 @@ declare(strict_types=1);
 namespace App\Domain\Shared\ValueObject;
 
 use Assert\Assertion;
-use Assert\AssertionFailedException;
 
 class Email implements \JsonSerializable
 {
     private string $email;
 
-    public function __construct(string $email)
+    protected function __construct(string $email)
     {
         $this->email = $email;
     }
 
-    /**
-     * @throws AssertionFailedException
-     */
     public static function fromString(string $email): self
     {
         Assertion::email($email, 'Not a valid email');

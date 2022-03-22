@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Shared\ValueObject;
 
 use Assert\Assertion;
-use Assert\AssertionFailedException;
+use JetBrains\PhpStorm\Pure;
 
 class Name implements \JsonSerializable
 {
@@ -13,14 +13,11 @@ class Name implements \JsonSerializable
 
     private string $name;
 
-    public function __construct(string $name)
+    protected function __construct(string $name)
     {
         $this->name = $name;
     }
 
-    /**
-     * @throws AssertionFailedException
-     */
     public static function fromString(string $name): self
     {
         Assertion::notNull($name, 'Not a valid name');
@@ -38,7 +35,7 @@ class Name implements \JsonSerializable
         return $this->name;
     }
 
-    public function jsonSerialize(): string
+    #[Pure] public function jsonSerialize(): string
     {
         return $this->toString();
     }

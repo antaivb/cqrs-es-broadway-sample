@@ -13,14 +13,11 @@ class CreationDate implements \JsonSerializable
 
     public const FORMAT = 'Y-m-d H:i:s';
 
-    public function __construct(\DateTime $creationDate)
+    protected function __construct(\DateTime $creationDate)
     {
         $this->creationDate = $creationDate;
     }
 
-    /**
-     * @throws AssertionFailedException
-     */
     public static function fromString(string $date): self
     {
         Assertion::date($date,  self::FORMAT, 'Not a valid date');
@@ -28,14 +25,6 @@ class CreationDate implements \JsonSerializable
         return new self(new \DateTime($date));
     }
 
-    public static function now(): self
-    {
-        return new self(new \DateTime());
-    }
-
-    /**
-     * @throws AssertionFailedException
-     */
     public static function fromFormat(string $date, string $format): self
     {
         Assertion::date($date, $format, 'Not a valid date');

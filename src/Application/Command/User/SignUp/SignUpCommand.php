@@ -15,15 +15,21 @@ final class SignUpCommand implements CommandInterface
     private Name $name;
     private Credentials $credentials;
 
-    public function __construct(
+    protected function __construct() {}
+
+    public static function withData(
         string $name,
         string $email,
         string $plainPassword,
-    ) {
-        $this->name = Name::fromString($name);
+    ): self {
+        $command = new self();
+
+        $command->name = Name::fromString($name);
         $email = Email::fromString($email);
         $hashedPassword = HashedPassword::encode($plainPassword);
-        $this->credentials = new Credentials($email, $hashedPassword);
+        $command->credentials = new Credentials($email, $hashedPassword);
+
+        return $command;
     }
 
     public function name(): Name

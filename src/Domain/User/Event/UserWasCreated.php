@@ -8,6 +8,7 @@ use App\Domain\Shared\ValueObject\CreationDate;
 use App\Domain\User\Model\ValueObject\Auth\Credentials;
 use Broadway\Serializer\Serializable;
 use JetBrains\PhpStorm\ArrayShape;
+use JetBrains\PhpStorm\Pure;
 
 final class UserWasCreated implements Serializable
 {
@@ -16,16 +17,22 @@ final class UserWasCreated implements Serializable
     private Credentials $credentials;
     private CreationDate $creationDate;
 
-    public function __construct(
+    protected function __construct() {}
+
+    #[Pure] public static function withData(
         UserId $id,
         Name $name,
         Credentials $credentials,
         CreationDate $creationDate
-    ) {
-        $this->id = $id;
-        $this->name = $name;
-        $this->credentials = $credentials;
-        $this->creationDate = $creationDate;
+    ): self {
+        $event = new self();
+
+        $event->id = $id;
+        $event->name = $name;
+        $event->credentials = $credentials;
+        $event->creationDate = $creationDate;
+
+        return $event;
     }
 
     public function id(): UserId
@@ -62,7 +69,7 @@ final class UserWasCreated implements Serializable
 
     public static function deserialize(array $data): self
     {
-        return new self(
+        return self::withData(
             UserId::fromString($data['id']),
             Name::fromString($data['name']),
             new Credentials($data['email'], $data['hashedPassword']),
