@@ -26,8 +26,8 @@ abstract class CommandQueryController extends QueryController
     /**
      * @throws Throwable
      */
-    protected function handle(CommandInterface $command): void
+    protected function dispatch(CommandInterface $command): void
     {
-        $this->commandBus->handle($command);
+        $this->commandBus->dispatch($command);
     }
 }

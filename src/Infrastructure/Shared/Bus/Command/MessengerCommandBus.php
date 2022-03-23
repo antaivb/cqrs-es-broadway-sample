@@ -25,7 +25,7 @@ final class MessengerCommandBus implements CommandBusInterface
     /**
      * @throws Throwable
      */
-    public function handle(CommandInterface $command): void
+    public function dispatch(CommandInterface $command): void
     {
         try {
             $this->messageBus->dispatch($command);
