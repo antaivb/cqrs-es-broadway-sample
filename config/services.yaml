@@ -25,6 +25,11 @@ services:
             tags:
                 - { name: messenger.message_handler, bus: messenger.bus.query }
     
+        Broadway\EventHandling\EventListener:
+            public: true
+            tags:
+                - { name: broadway.domain.event_listener }
+
     App\:
         resource: '../src/*'
         exclude: '../src/Infrastructure/Shared/Persistence/Doctrine/Migration/*'
