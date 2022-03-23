@@ -45,7 +45,15 @@ Cqrs Es with Broadway
           - Call ```UserRepository``` to save ```UserView``` with Doctrine into database 
     - #### Repository
       - Create a standard ```UserRepository``` with ```save``` function to store ```UserView``` model
-
+  - ### Process manager:
+    - #### Sync:
+      - Create ```DomainEventHandler``` to catch all events executed in Broadway event bus.
+        - Implements ```Broadway\EventHandling\EventListener``` to catch events
+      - Create ```SendWelcomeEmailProcessManager``` with Domain Event as parameter (```UserWasCreated```) to send an email
+    - ### Async:
+      - Todo
+  - ### Recovery data:
+    - Todo
 # Execution
 Create a user storing event when user was created and saving in User MySql table
 ### Commands:
@@ -60,6 +68,3 @@ Create a user storing event when user was created and saving in User MySql table
         --form '_password="password123"'
   ```
 
-# TODO
-- Recovery data
-- ProcessorManager / Saga to send email
