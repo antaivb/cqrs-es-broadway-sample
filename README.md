@@ -62,7 +62,11 @@ Cqrs Es with Broadway
             - Create ```publish``` method to dispatch event in RabbitMQ. 
       - Create ```MessengerAsyncEventBus``` where configure async event bus and send message.
   - ### Recovery data:
-    - Todo
+    - If user table is truncated, it is possible to recovery all data across events stored.
+      - Create ```RestoreUserCommand``` to call ```Replayer``` class to execute events
+      - Create ```Replayer``` class where implements ```EventVisitor```
+        - ```replayForEvent``` method is called all events by type to recovery events. 
+        - Then, ```doWithEvent``` method is called with each event to restore 
 # Execution
 Create a user storing event when user was created and saving in User MySql table
 ### Commands:

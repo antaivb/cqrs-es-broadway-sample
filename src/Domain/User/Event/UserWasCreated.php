@@ -2,7 +2,9 @@
 
 namespace App\Domain\User\Event;
 
+use App\Domain\Shared\ValueObject\Email;
 use App\Domain\Shared\ValueObject\Name;
+use App\Domain\User\Model\ValueObject\Auth\HashedPassword;
 use App\Domain\User\Model\ValueObject\UserId;
 use App\Domain\Shared\ValueObject\CreationDate;
 use App\Domain\User\Model\ValueObject\Auth\Credentials;
@@ -72,7 +74,7 @@ final class UserWasCreated implements Serializable
         return self::withData(
             UserId::fromString($data['id']),
             Name::fromString($data['name']),
-            new Credentials($data['email'], $data['hashedPassword']),
+            new Credentials(Email::fromString($data['email']), HashedPassword::fromHash($data['hashedPassword'])),
             CreationDate::fromString($data['creationDate'])
         );
     }
