@@ -11,3 +11,19 @@ framework:
                 default_middleware: false
                 middleware:
                     - handle_message
+
+            messenger.bus.event.async:
+                default_middleware: allow_no_handlers
+                
+        transports:
+            events:
+                dsn: "%env(MESSENGER_TRANSPORT_DSN)%"
+                options:
+                    exchange:
+                        name: events
+                        type: fanout
+                    queues:
+                        events: ~
+                        
+        routing:
+            'Broadway\Domain\DomainMessage': events

@@ -6,6 +6,9 @@
     "require": {
         "php": ">=8.0",
         "beberlei/assert": "^3.3",
+        "broadway/broadway": "2.4.*",
+        "broadway/broadway-bundle": "0.5.*",
+        "broadway/event-store-dbal": "0.6.*",
         "doctrine/doctrine-bundle": "^2.1",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.7",
@@ -26,10 +29,7 @@
         "symfony/twig-bundle": "5.4.*",
         "symfony/yaml": "5.4.*",
         "twig/extra-bundle": "^2.12|^3.0",
-        "twig/twig": "3.*",
-        "broadway/broadway": "2.4.*",
-        "broadway/broadway-bundle": "0.5.*",
-        "broadway/event-store-dbal": "0.6.*"
+        "twig/twig": "3.*"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",

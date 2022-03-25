@@ -50,21 +50,33 @@ Cqrs Es with Broadway
       - Create ```DomainEventHandler``` to catch all events executed in Broadway event bus.
         - Implements ```Broadway\EventHandling\EventListener``` to catch events
       - Create ```SendWelcomeEmailProcessManager``` with Domain Event as parameter (```UserWasCreated```) to send an email
-    - ### Async:
-      - Todo
+    - #### Async:
+      - Add in ```DomainEventHandler``` implementation of ```MessageSubscriberInterface``` to catch all events published in named queued "events".
+        - Implements ```Symfony\Component\Messenger\Handler\MessageSubscriberInterface``` to catch events
+        - Add ```getHandledMessages``` method to get events from queue "events"
+        - Add ```__invoke``` method to send this event to Symfony event bus
+      - Create ```DomainEventPublisher``` to dispatch Asynchronous messages to RabbitMQ
+          - Implements ```EventListener``` to catch Broadway events and save in array message variable (in memory) 
+          - Implements ```EventSubscriberInterface``` necessary to catch kernel events.
+            - Create ```getSubscribedEvents``` to listen for the ```TERMINATE``` event to ensure that the event has been persisted.
+            - Create ```publish``` method to dispatch event in RabbitMQ. 
+      - Create ```MessengerAsyncEventBus``` where configure async event bus and send message.
   - ### Recovery data:
     - Todo
 # Execution
 Create a user storing event when user was created and saving in User MySql table
 ### Commands:
+  - Database container: ```cd docker && make```
   - Create database structure: ```bin/console doctrine:migrations:migrate```
+  - Execute project: ```make local```
+  - Execute consumer: ```bin/console messenger:consume events -vv```
 ### Postman
   Import this curl to Postman application and execute:
   ```
   curl  --location --request POST 'https://localhost:8000/signup' \
         --header 'Content-Type: application/json' \
         --form '_name="Victor"' \
-        --form '_email="victor.lopez@antaivb.com"' \
+        --form '_email="victor@antaivb.com"' \
         --form '_password="password123"'
   ```
 

@@ -42,6 +42,10 @@ services:
         arguments:
             - '@messenger.bus.query'
 
+    App\Infrastructure\Shared\Bus\AsyncEvent\MessengerAsyncEventBus:
+        arguments:
+            - '@messenger.bus.event.async'
+
     ### PORTS
     
     App\Ports\Http\Rest\Controller\:

@@ -18,9 +18,6 @@ class SendWelcomeEmailProcessManager
 
     public function __invoke(UserWasCreated $message)
     {
-        $this->logger->notice('------------------');
-        $this->logger->notice('Send Welcome Email');
-        $this->logger->notice($message->credentials()->email());
-        $this->logger->notice('------------------');
+        $this->logger->notice('--- Send Welcome Email to ' . $message->credentials()->email() . ' ---');
     }
 }
