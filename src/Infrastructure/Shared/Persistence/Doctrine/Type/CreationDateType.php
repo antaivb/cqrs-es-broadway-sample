@@ -20,7 +20,6 @@ final class CreationDateType extends Type
         return self::CREATION_DATE;
     }
 
-
     /**
      * Adds an SQL comment to typehint the actual Doctrine Type for reverse schema engineering.
      */
@@ -48,7 +47,7 @@ final class CreationDateType extends Type
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform) : ?string
     {
-        return $value ? $value->format($platform->getDateFormatString()) : null;
+        return $value?->format($platform->getDateFormatString());
     }
 
     /**

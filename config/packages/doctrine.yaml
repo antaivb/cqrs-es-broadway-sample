@@ -11,9 +11,15 @@ doctrine:
         schema_filter: ~^(?!fos_)~
         types:
             user_id: App\Infrastructure\User\Persistence\Doctrine\Type\UserIdType
+            booking_id: App\Infrastructure\Booking\Persistence\Doctrine\Type\BookingIdType
+            session_id: App\Infrastructure\Session\Persistence\Doctrine\Type\SessionIdType
             name: App\Infrastructure\Shared\Persistence\Doctrine\Type\NameType
-            creation_date: App\Infrastructure\Shared\Persistence\Doctrine\Type\CreationDateType
             email: App\Infrastructure\Shared\Persistence\Doctrine\Type\EmailType
+            creation_date: App\Infrastructure\Shared\Persistence\Doctrine\Type\CreationDateType
+            updated_at: App\Infrastructure\Shared\Persistence\Doctrine\Type\UpdatedAtType
+            when: App\Infrastructure\Shared\Persistence\Doctrine\Type\WhenType
+            unsubscribed_at: App\Infrastructure\Booking\Persistence\Doctrine\Type\UnsubscribedAtType
+            status: App\Infrastructure\Session\Persistence\Doctrine\Type\StatusType
 
     orm:
         auto_generate_proxy_classes: true

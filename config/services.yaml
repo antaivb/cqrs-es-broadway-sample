@@ -68,8 +68,16 @@ services:
     
     App\Domain\User\Repository\UserRepositoryInterface: '@App\Infrastructure\User\ReadModel\Repository\UserRepository'
     App\Domain\User\Repository\UserStoreRepositoryInterface: '@App\Infrastructure\User\Repository\UserStoreRepository'
+    App\Domain\Booking\Repository\BookingRepositoryInterface: '@App\Infrastructure\Booking\ReadModel\Repository\BookingRepository'
+    App\Domain\Booking\Repository\BookingStoreRepositoryInterface: '@App\Infrastructure\Booking\Repository\BookingStoreRepository'
+    App\Domain\Session\Repository\SessionRepositoryInterface: '@App\Infrastructure\Session\ReadModel\Repository\SessionRepository'
+    App\Domain\Session\Repository\SessionStoreRepositoryInterface: '@App\Infrastructure\Session\Repository\SessionStoreRepository'
 
     ### Projection
     App\Infrastructure\User\ReadModel\Projection\:
         resource: '../src/Infrastructure/User/ReadModel/Projection/*'
+        tags: [ 'broadway.domain.event_listener' ]
+        
+    App\Infrastructure\Booking\ReadModel\Projection\:
+        resource: '../src/Infrastructure/Booking/ReadModel/Projection/*'
         tags: [ 'broadway.domain.event_listener' ]

@@ -20,4 +20,16 @@ class UserRepository extends DoctrineRepository implements UserRepositoryInterfa
         $userRepository = $this->repository(UserView::class);
         return $userRepository->findOneBy(['email' => $userEmail]);
     }
+
+    public function findById(string $id): ?UserView
+    {
+        $userRepository = $this->repository(UserView::class);
+
+        $qb = $userRepository
+            ->createQueryBuilder('user')
+            ->where('user.id = :id')
+            ->setParameter('id', $id);
+
+        return $this->oneOrException($qb);
+    }
 }

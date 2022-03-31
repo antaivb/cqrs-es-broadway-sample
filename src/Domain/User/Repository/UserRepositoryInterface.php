@@ -20,4 +20,6 @@ interface UserRepositoryInterface
     public function save(UserView $user): void;
 
     public function findByEmail(string $userEmail): ?UserView;
+
+    public function findById(string $id): ?UserView;
 }

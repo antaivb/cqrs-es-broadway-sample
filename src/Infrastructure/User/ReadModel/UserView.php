@@ -30,7 +30,7 @@ class UserView implements SerializableReadModel
         Name $name,
         Credentials $credentials,
         CreationDate $creationDate,
-    ): UserView {
+    ): self {
         $user = new self();
 
         $user->id = $id;

@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\User\Specification;
 
-use Assert\Assertion;
 use App\Domain\Shared\Specification\AbstractSpecification;
 use App\Domain\User\Exception\EmailAlreadyExistException;
 use App\Domain\User\Specification\UniqueEmailSpecificationInterface;
@@ -23,7 +22,6 @@ final class UniqueEmailSpecification extends AbstractSpecification implements Un
 
     public function isUnique(Email $email): void
     {
-        Assertion::email($email->toString());
         $this->isSatisfiedBy($email->toString());
     }
 

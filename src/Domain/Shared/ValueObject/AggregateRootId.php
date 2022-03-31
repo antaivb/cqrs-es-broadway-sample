@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Shared\ValueObject;
 
 use Assert\Assertion;
+use JetBrains\PhpStorm\Pure;
 
 abstract class AggregateRootId
 {
@@ -31,7 +32,7 @@ abstract class AggregateRootId
         return $this->id;
     }
 
-    public function jsonSerialize(): string
+    #[Pure] public function jsonSerialize(): string
     {
         return $this->toString();
     }

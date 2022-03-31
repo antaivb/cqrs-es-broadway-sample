@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Domain\Shared\ValueObject;
 
 use Assert\Assertion;
-use Assert\AssertionFailedException;
 
 class CreationDate implements \JsonSerializable
 {
