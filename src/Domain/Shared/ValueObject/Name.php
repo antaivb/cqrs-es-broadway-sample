@@ -30,9 +30,9 @@ class Name implements \JsonSerializable
         return $this->name;
     }
 
-    public function __toString(): string
+    #[Pure] public function __toString(): string
     {
-        return $this->name;
+        return $this->toString();
     }
 
     #[Pure] public function jsonSerialize(): string

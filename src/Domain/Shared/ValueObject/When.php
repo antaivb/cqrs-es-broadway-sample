@@ -5,30 +5,18 @@ declare(strict_types=1);
 namespace App\Domain\Shared\ValueObject;
 
 use Assert\Assertion;
+use DateTime;
 
 class When implements \JsonSerializable
 {
-    private \DateTime $when;
+    private DateTime $when;
 
     public const FORMAT = 'Y-m-d H:i:s';
+    protected function __construct() {}
 
-    protected function __construct(\DateTime $when)
+    public function toString(): string
     {
-        $this->when = $when;
-    }
-
-    public static function fromString(string $date): self
-    {
-        Assertion::date($date, self::FORMAT, 'Not a valid date');
-
-        return new self(new \DateTime($date));
-    }
-
-    public static function fromFormat(string $date, string $format): self
-    {
-        Assertion::date($date, $format, 'Not a valid date');
-
-        return new self(new \DateTime($date));
+        return $this->when->format(self::FORMAT);
     }
 
     public function format(string $format): string
@@ -36,23 +24,36 @@ class When implements \JsonSerializable
         return $this->when->format($format);
     }
 
-    public function toString(): string
+    public static function fromString(string $date): self
     {
-        return $this->when->format(self::FORMAT);
+        return self::fromFormat($date, self::FORMAT);
+    }
+
+    public static function fromFormat(string $date, string $format): self
+    {
+        Assertion::date($date, $format, 'Not a valid date');
+
+        $datetime = new self();
+        $datetime->when = new DateTime($date);
+
+        return $datetime;
+    }
+
+    public static function generate(): self
+    {
+        $datetime = new self();
+        $datetime->when = new DateTime();
+
+        return $datetime;
     }
 
     public function __toString(): string
     {
-        return $this->when->format(self::FORMAT);
+        return $this->toString();
     }
 
     public function jsonSerialize(): string
     {
         return $this->toString();
-    }
-
-    public static function generate(): self
-    {
-        return new self(new \DateTime());
     }
 }

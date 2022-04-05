@@ -56,6 +56,6 @@ final class StatusType extends Type
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform) : ?string
     {
-        return $value?->toInt();
+        return $value?->toInteger();
     }
 }

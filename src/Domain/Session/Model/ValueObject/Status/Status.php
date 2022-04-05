@@ -2,6 +2,8 @@
 
 namespace App\Domain\Session\Model\ValueObject\Status;
 
+use Assert\Assertion;
+use Assert\AssertionFailedException;
 use JetBrains\PhpStorm\Pure;
 
 class Status implements \JsonSerializable
@@ -18,8 +20,14 @@ class Status implements \JsonSerializable
 
     public static function fromInt(int $statusValue): self
     {
+        try {
+            Assertion::inArray($statusValue, self::ALLOWED_STATUSES);
+        } catch (AssertionFailedException $e) {
+            throw new StatusNotAllowedException();
+        }
+
         $status = new self();
-        $status->setStatus($statusValue);
+        $status->status = $statusValue;
 
         return $status;
     }
@@ -29,16 +37,7 @@ class Status implements \JsonSerializable
         return $this->status;
     }
 
-    private function setStatus(int $status): void
-    {
-        if (!in_array($status, self::ALLOWED_STATUSES)) {
-            throw new StatusNotAllowedException();
-        }
-
-        $this->status = $status;
-    }
-
-    public function toInt(): int
+    public function toInteger(): int
     {
         return $this->status;
     }
@@ -60,6 +59,6 @@ class Status implements \JsonSerializable
 
     #[Pure] public function jsonSerialize(): int
     {
-        return $this->toInt();
+        return $this->toInteger();
     }
 }

@@ -17,19 +17,14 @@ abstract class AggregateRootId
         $this->id = $id;
     }
 
-    public function getValue(): string
-    {
-        return $this->id;
-    }
-
     public function toString(): string
     {
         return $this->id;
     }
 
-    public function __toString(): string
+    #[Pure] public function __toString(): string
     {
-        return $this->id;
+        return $this->toString();
     }
 
     #[Pure] public function jsonSerialize(): string

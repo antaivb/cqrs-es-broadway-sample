@@ -9,18 +9,18 @@ class Meeting
     private string $url;
     private string $hostUrl;
 
-    protected function __construct(string $url, string $hostUrl)
-    {
-        $this->url = $url;
-        $this->hostUrl = $hostUrl;
-    }
+    protected function __construct() {}
 
     public static function fromString(string $url, string $hostUrl): self
     {
         Assertion::url($url, 'Not a valid url');
         Assertion::url($hostUrl, 'Not a valid url');
 
-        return new self($url, $hostUrl);
+        $meeting = new self();
+        $meeting->url = $url;
+        $meeting->hostUrl = $hostUrl;
+
+        return $meeting;
     }
 
     public function url(): string

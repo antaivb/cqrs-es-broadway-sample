@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\Shared\ValueObject;
 
 use Assert\Assertion;
+use JetBrains\PhpStorm\Pure;
 
 class Email implements \JsonSerializable
 {
@@ -27,12 +28,12 @@ class Email implements \JsonSerializable
         return $this->email;
     }
 
-    public function __toString(): string
+    #[Pure] public function __toString(): string
     {
-        return $this->email;
+        return $this->toString();
     }
 
-    public function jsonSerialize(): string
+    #[Pure] public function jsonSerialize(): string
     {
         return $this->toString();
     }
