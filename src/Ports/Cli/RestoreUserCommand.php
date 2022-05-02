@@ -36,6 +36,6 @@ class RestoreUserCommand extends Command
         $replayer = new Replayer($this->eventStoreManagement, $this->userRepository);
         $replayer->replayForEvent([UserWasCreated::class]);
 
-        return 1;
+        return Command::SUCCESS;
     }
 }

@@ -11,6 +11,7 @@ use App\Domain\User\Model\ValueObject\Auth\HashedPassword;
 use App\Domain\User\Model\ValueObject\Auth\Credentials;
 use App\Domain\Shared\ValueObject\Email;
 use App\Domain\Shared\ValueObject\Name;
+use App\Domain\User\Specification\ExistUserSpecificationInterface;
 use App\Domain\User\Specification\UniqueEmailSpecificationInterface;
 use Broadway\EventSourcing\EventSourcedAggregateRoot;
 use JetBrains\PhpStorm\Pure;
@@ -32,6 +33,25 @@ class User extends EventSourcedAggregateRoot
         UniqueEmailSpecificationInterface $uniqueEmailSpecification
     ): self {
         $uniqueEmailSpecification->isUnique($credentials->email());
+
+        $user = new self();
+        $user->apply(UserWasCreated::withData(
+            $id,
+            $name,
+            $credentials,
+            CreationDate::generate(),
+        ));
+
+        return $user;
+    }
+
+    public static function recreate(
+        UserId $id,
+        Name $name,
+        Credentials $credentials,
+        ExistUserSpecificationInterface $existUserSpecification
+    ): self {
+        $existUserSpecification->exist($id);
 
         $user = new self();
         $user->apply(UserWasCreated::withData(

@@ -21,6 +21,12 @@ class UserRepository extends DoctrineRepository implements UserRepositoryInterfa
         return $userRepository->findOneBy(['email' => $userEmail]);
     }
 
+    public function findAll(): ?array
+    {
+        $userRepository = $this->repository(UserView::class);
+        return $userRepository->findAll();
+    }
+
     public function findById(string $id): ?UserView
     {
         $userRepository = $this->repository(UserView::class);

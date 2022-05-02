@@ -2,6 +2,7 @@
 
 namespace App\Infrastructure\Shared\Event;
 
+use App\Domain\User\Event\UserWasCreated;
 use Broadway\Domain\DomainMessage;
 use Broadway\EventHandling\EventListener;
 use Psr\Log\LoggerInterface;

@@ -22,4 +22,6 @@ interface UserRepositoryInterface
     public function findByEmail(string $userEmail): ?UserView;
 
     public function findById(string $id): ?UserView;
+
+    public function findAll(): ?array;
 }
