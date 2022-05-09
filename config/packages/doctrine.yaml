@@ -14,6 +14,7 @@ doctrine:
             booking_id: App\Infrastructure\Booking\Persistence\Doctrine\Type\BookingIdType
             session_id: App\Infrastructure\Session\Persistence\Doctrine\Type\SessionIdType
             name: App\Infrastructure\Shared\Persistence\Doctrine\Type\NameType
+            lastname: App\Infrastructure\Shared\Persistence\Doctrine\Type\LastNameType
             email: App\Infrastructure\Shared\Persistence\Doctrine\Type\EmailType
             creation_date: App\Infrastructure\Shared\Persistence\Doctrine\Type\CreationDateType
             updated_at: App\Infrastructure\Shared\Persistence\Doctrine\Type\UpdatedAtType

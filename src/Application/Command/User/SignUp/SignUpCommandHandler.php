@@ -25,6 +25,10 @@ final class SignUpCommandHandler implements CommandHandlerInterface
 
     public function __invoke(SignUpCommand $command): void
     {
+        $user = $this->userStoreRepository->get(UserId::fromString('97002b63-8e02-4e1d-a71f-5b0896880f3e'));
+        var_dump($user);
+        die;
+
         $user = User::create(
             UserId::generate(),
             $command->name(),

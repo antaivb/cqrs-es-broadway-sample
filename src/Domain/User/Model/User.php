@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Domain\User\Model;
 
 use App\Domain\Shared\ValueObject\CreationDate;
+use App\Domain\Shared\ValueObject\LastName;
 use App\Domain\User\Event\UserWasCreated;
 use App\Domain\User\Model\ValueObject\UserId;
 use App\Domain\User\Model\ValueObject\Auth\HashedPassword;
@@ -20,6 +21,7 @@ class User extends EventSourcedAggregateRoot
 {
     private UserId $id;
     private Name $name;
+    private LastName $lastname;
     private Email $email;
     private HashedPassword $hashedPassword;
     private CreationDate $creationDate;
@@ -29,6 +31,7 @@ class User extends EventSourcedAggregateRoot
     public static function create(
         UserId $id,
         Name $name,
+        LastName $lastname,
         Credentials $credentials,
         UniqueEmailSpecificationInterface $uniqueEmailSpecification
     ): self {
@@ -38,6 +41,7 @@ class User extends EventSourcedAggregateRoot
         $user->apply(UserWasCreated::withData(
             $id,
             $name,
+            $lastname,
             $credentials,
             CreationDate::generate(),
         ));
@@ -68,6 +72,7 @@ class User extends EventSourcedAggregateRoot
     {
         $this->id = $userWasCreated->id();
         $this->name = $userWasCreated->name();
+        $this->lastname = $userWasCreated->lastname();
         $this->creationDate = $userWasCreated->createdAt();
         $this->hashedPassword = $userWasCreated->credentials()->password();
         $this->email = $userWasCreated->credentials()->email();
@@ -86,6 +91,11 @@ class User extends EventSourcedAggregateRoot
     public function name(): Name
     {
         return $this->name;
+    }
+
+    public function lastname(): LastName
+    {
+        return $this->lastname;
     }
 
     public function email(): Email
@@ -126,5 +136,10 @@ class User extends EventSourcedAggregateRoot
     public function setCreationDate(CreationDate $creationDate): void
     {
         $this->creationDate = $creationDate;
+    }
+
+    public function setLastname(LastName $lastname): void
+    {
+        $this->lastname = $lastname;
     }
 }

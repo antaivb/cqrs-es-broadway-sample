@@ -7,4 +7,5 @@ services:
             - '@broadway.serializer.metadata'
             - 'events'
             - false
+            - '@App\Infrastructure\Shared\Event\DomainEventUpcaster'
             - '@broadway.uuid.converter'
