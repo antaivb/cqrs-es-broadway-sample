@@ -19,10 +19,10 @@ class DomainEventUpcaster implements Upcaster
         return $serializedEvent['class'] === UserWasCreated::class;
     }
 
-    public function upcast(array $serializedEvent): array
+    public function upcast(array $serializedEvent, int $playhead): array
     {
         return match ($serializedEvent['class']) {
-            UserWasCreated::class => $this->userUpcaster->upcast($serializedEvent),
+            UserWasCreated::class => $this->userUpcaster->upcast($serializedEvent, $playhead),
             default => $serializedEvent
         };
     }

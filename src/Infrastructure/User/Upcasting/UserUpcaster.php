@@ -6,7 +6,7 @@ namespace App\Infrastructure\User\Upcasting;
 
 class UserUpcaster
 {
-    public function upcast(array $serializedEvent): array
+    public function upcast(array $serializedEvent, int $playhead): array
     {
         $event = $serializedEvent['payload'];
         if (!isset($event['lastname'])) {
