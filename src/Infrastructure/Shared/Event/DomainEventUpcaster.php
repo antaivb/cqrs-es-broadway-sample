@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Shared\Event;
 
+use App\Domain\Shared\Upcasting\Upcaster;
 use App\Domain\User\Event\UserWasCreated;
 use App\Infrastructure\User\Upcasting\UserUpcaster;
-use Broadway\Upcasting\Upcaster;
 
 class DomainEventUpcaster implements Upcaster
 {

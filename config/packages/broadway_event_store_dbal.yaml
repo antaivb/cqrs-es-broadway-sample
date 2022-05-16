@@ -1,11 +1,2 @@
 services:
-    Broadway\EventStore\Dbal\DBALEventStore:
-        public: true
-        arguments:
-            - '@doctrine.dbal.default_connection'
-            - '@broadway.serializer.payload'
-            - '@broadway.serializer.metadata'
-            - 'events'
-            - false
-            - '@App\Infrastructure\Shared\Event\DomainEventUpcaster'
-            - '@broadway.uuid.converter'
+    Broadway\EventStore\Dbal\DBALEventStore: ~

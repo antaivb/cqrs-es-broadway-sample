@@ -81,3 +81,15 @@ services:
     App\Infrastructure\Booking\ReadModel\Projection\:
         resource: '../src/Infrastructure/Booking/ReadModel/Projection/*'
         tags: [ 'broadway.domain.event_listener' ]
+
+    App\Infrastructure\Shared\Persistence\DBALEventStoreDecorator:
+        decorates: Broadway\EventStore\Dbal\DBALEventStore
+        decoration_on_invalid: null
+        arguments:
+            - '@App\Infrastructure\Shared\Event\DomainEventUpcaster'
+            - '@doctrine.dbal.default_connection'
+            - '@broadway.serializer.payload'
+            - '@broadway.serializer.metadata'
+            - 'events'
+            - false
+            - '@broadway.uuid.converter'

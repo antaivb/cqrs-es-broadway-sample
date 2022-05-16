@@ -16,7 +16,7 @@
     "require": {
         "php": ">=8.0",
         "beberlei/assert": "^3.3",
-        "broadway/broadway": "dev-upcasting as 2.4.0",
+        "broadway/broadway": "2.4.0",
         "broadway/broadway-bundle": "0.5.*",
         "broadway/event-store-dbal": "dev-upcasting as 0.6.0",
         "doctrine/doctrine-bundle": "^2.1",
