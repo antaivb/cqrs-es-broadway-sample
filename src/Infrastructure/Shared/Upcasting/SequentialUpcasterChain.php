@@ -2,31 +2,18 @@
 
 namespace App\Infrastructure\Shared\Upcasting;
 
-use App\Domain\Shared\Upcasting\Upcaster;
 use App\Domain\Shared\Upcasting\UpcasterChain;
 
 final class SequentialUpcasterChain implements UpcasterChain
 {
-    /**
-     * @var Upcaster[]
-     */
-    private $upcasters;
+    private array $upcasters;
 
-    /**
-     * @param Upcaster[] $upcasters
-     */
     public function __construct(array $upcasters)
     {
         $this->upcasters = $upcasters;
     }
 
-    /**
-     * @param array $serializedEvent
-     * @param int $playhead
-     *
-     * @return array the upcasted objects
-     */
-    public function upcast(array $serializedEvent, int $playhead)
+    public function upcast(array $serializedEvent, int $playhead): array
     {
         foreach ($this->upcasters as $upcaster) {
             if ($upcaster->supports($serializedEvent)) {

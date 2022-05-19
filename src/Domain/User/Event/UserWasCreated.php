@@ -11,7 +11,6 @@ use App\Domain\Shared\ValueObject\CreationDate;
 use App\Domain\User\Model\ValueObject\Auth\Credentials;
 use Broadway\Serializer\Serializable;
 use JetBrains\PhpStorm\ArrayShape;
-use JetBrains\PhpStorm\Pure;
 
 final class UserWasCreated implements Serializable
 {
@@ -23,7 +22,7 @@ final class UserWasCreated implements Serializable
 
     protected function __construct() {}
 
-    #[Pure] public static function withData(
+    public static function withData(
         UserId $id,
         Name $name,
         LastName $lastname,
