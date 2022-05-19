@@ -6,10 +6,6 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "git@github.com:antaivb/broadway"
-        },
-        {
-            "type": "vcs",
             "url": "git@github.com:antaivb/event-store-dbal"
         }
     ],

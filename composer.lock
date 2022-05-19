@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b1d9136b7b20bf29349280ad3ef0f42c",
+    "content-hash": "7e660976aaac47100f64e478d485bced",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -138,12 +138,12 @@
             "version": "2.4.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/antaivb/broadway.git",
+                "url": "https://github.com/broadway/broadway.git",
                 "reference": "d2e54aec3c01cf4025f93a85c7176e990bd67a5d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antaivb/broadway/zipball/d2e54aec3c01cf4025f93a85c7176e990bd67a5d",
+                "url": "https://api.github.com/repos/broadway/broadway/zipball/d2e54aec3c01cf4025f93a85c7176e990bd67a5d",
                 "reference": "d2e54aec3c01cf4025f93a85c7176e990bd67a5d",
                 "shasum": ""
             },
@@ -177,11 +177,7 @@
                     "Broadway\\": "src/Broadway/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Broadway\\": "test/Broadway/"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -219,7 +215,8 @@
                 "event sourcing"
             ],
             "support": {
-                "source": "https://github.com/antaivb/broadway/tree/2.4.0"
+                "issues": "https://github.com/broadway/broadway/issues",
+                "source": "https://github.com/broadway/broadway/tree/2.4.0"
             },
             "time": "2020-12-29T11:52:48+00:00"
         },
@@ -6778,16 +6775,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v3.4.0",
+            "version": "v3.4.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "ed19f4bf9d19c4ef920b5d8243910bd32e85b9ba"
+                "reference": "e939eae92386b69b49cfa4599dd9bead6bf4a342"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/ed19f4bf9d19c4ef920b5d8243910bd32e85b9ba",
-                "reference": "ed19f4bf9d19c4ef920b5d8243910bd32e85b9ba",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/e939eae92386b69b49cfa4599dd9bead6bf4a342",
+                "reference": "e939eae92386b69b49cfa4599dd9bead6bf4a342",
                 "shasum": ""
             },
             "require": {
@@ -6838,7 +6835,7 @@
             ],
             "support": {
                 "issues": "https://github.com/twigphp/Twig/issues",
-                "source": "https://github.com/twigphp/Twig/tree/v3.4.0"
+                "source": "https://github.com/twigphp/Twig/tree/v3.4.1"
             },
             "funding": [
                 {
@@ -6850,7 +6847,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-05-15T06:25:28+00:00"
+            "time": "2022-05-17T05:48:52+00:00"
         },
         {
             "name": "webmozart/assert",
