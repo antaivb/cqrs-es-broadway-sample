@@ -7,7 +7,7 @@ namespace App\Domain\Shared\ValueObject;
 use Assert\Assertion;
 use JetBrains\PhpStorm\Pure;
 
-class LastName implements \JsonSerializable
+class Lastname implements \JsonSerializable
 {
     public const MAX_LENGTH = 2000;
 

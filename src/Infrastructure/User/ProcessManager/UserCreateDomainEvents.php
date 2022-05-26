@@ -27,6 +27,7 @@ class UserCreateDomainEvents extends AbstractCreatorDomainEvents
         return User::recreate(
             $row->id(),
             $row->name(),
+            $row->lastname(),
             new Credentials($row->email(), $row->hashedPassword()),
             $this->existUserSpecification
         );

@@ -2,17 +2,17 @@
 
 namespace App\Infrastructure\Shared\Persistence\Doctrine\Type;
 
-use App\Domain\Shared\ValueObject\Name;
+use App\Domain\Shared\ValueObject\Lastname;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\StringType;
 
-final class LastNameType extends StringType
+final class LastnameType extends StringType
 {
     const NAME = 'lastname';
 
     protected function getUidClass(): string
     {
-        return Name::class;
+        return Lastname::class;
     }
 
     public function getName(): string
@@ -26,7 +26,7 @@ final class LastNameType extends StringType
     final public function getSQLDeclaration(array $column, AbstractPlatform $platform) : string
     {
         return $platform->getVarcharTypeDeclarationSQL([
-            'length' => Name::MAX_LENGTH,
+            'length' => Lastname::MAX_LENGTH,
         ]);
     }
 
@@ -45,16 +45,16 @@ final class LastNameType extends StringType
      *
      * @param mixed $value The value to convert.
      */
-    public function convertToPHPValue($value, AbstractPlatform $platform) : ?Name
+    public function convertToPHPValue($value, AbstractPlatform $platform) : ?Lastname
     {
-        return $value !== null ? Name::fromString($value) : null;
+        return $value !== null ? Lastname::fromString($value) : null;
     }
 
 
     /**
      * Converts a value from its PHP representation to its database representation of this type.
      *
-     * @param Name|null $value The value to convert.
+     * @param Lastname|null $value The value to convert.
      */
     public function convertToDatabaseValue($value, AbstractPlatform $platform) : ?string
     {

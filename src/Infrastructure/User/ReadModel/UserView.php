@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\User\ReadModel;
 
+use App\Domain\Shared\ValueObject\Lastname;
 use App\Domain\User\Model\ValueObject\UserId;
 use App\Domain\User\Model\ValueObject\Auth\HashedPassword;
 use App\Domain\User\Model\ValueObject\Auth\Credentials;
@@ -19,6 +20,7 @@ class UserView implements SerializableReadModel
 {
     private UserId $id;
     private Name $name;
+    private Lastname $lastname;
     private Email $email;
     private CreationDate $creationDate;
     private HashedPassword $hashedPassword;
@@ -28,6 +30,7 @@ class UserView implements SerializableReadModel
     public static function withData(
         UserId $id,
         Name $name,
+        Lastname $lastname,
         Credentials $credentials,
         CreationDate $creationDate,
     ): self {
@@ -35,6 +38,7 @@ class UserView implements SerializableReadModel
 
         $user->id = $id;
         $user->name = $name;
+        $user->lastname = $lastname;
         $user->creationDate = $creationDate;
         $user->hashedPassword = $credentials->password();
         $user->email = $credentials->email();
@@ -50,6 +54,11 @@ class UserView implements SerializableReadModel
     public function name(): Name
     {
         return $this->name;
+    }
+
+    public function lastname(): Lastname
+    {
+        return $this->lastname;
     }
 
     public function email(): Email
@@ -82,17 +91,19 @@ class UserView implements SerializableReadModel
         return self::withData(
             UserId::fromString($data['id']),
             Name::fromString($data['name']),
+            Lastname::fromString($data['lastname']),
             new Credentials(Email::fromString($data['email']), HashedPassword::fromHash($data['hashedPassword'])),
             CreationDate::fromString($data['creationDate'])
         );
     }
 
-    #[ArrayShape(['id' => "string", 'name' => "string", 'email' => "string", 'hashedPassword' => "string", 'creationDate' => "string"])]
+    #[ArrayShape(['id' => "string", 'name' => "string", 'lastname' => "string", 'email' => "string", 'hashedPassword' => "string", 'creationDate' => "string"])]
     public function serialize(): array
     {
         return [
             'id' => $this->id()->toString(),
             'name' => $this->name()->toString(),
+            'lastname' => $this->lastname()->toString(),
             'email' => $this->email()->toString(),
             'hashedPassword' => $this->hashedPassword()->toString(),
             'creationDate' => $this->creationDate()->toString()

@@ -3,7 +3,7 @@
 namespace App\Domain\User\Event;
 
 use App\Domain\Shared\ValueObject\Email;
-use App\Domain\Shared\ValueObject\LastName;
+use App\Domain\Shared\ValueObject\Lastname;
 use App\Domain\Shared\ValueObject\Name;
 use App\Domain\User\Model\ValueObject\Auth\HashedPassword;
 use App\Domain\User\Model\ValueObject\UserId;
@@ -16,17 +16,17 @@ final class UserWasCreated implements Serializable
 {
     private UserId $id;
     private Name $name;
-    private LastName $lastname;
+    private Lastname $lastname;
     private Credentials $credentials;
     private CreationDate $creationDate;
 
     protected function __construct() {}
 
     public static function withData(
-        UserId $id,
-        Name $name,
-        LastName $lastname,
-        Credentials $credentials,
+        UserId       $id,
+        Name         $name,
+        Lastname     $lastname,
+        Credentials  $credentials,
         CreationDate $creationDate
     ): self {
         $event = new self();
@@ -50,7 +50,7 @@ final class UserWasCreated implements Serializable
         return $this->name;
     }
 
-    public function lastname(): LastName
+    public function lastname(): Lastname
     {
         return $this->lastname;
     }
@@ -83,7 +83,7 @@ final class UserWasCreated implements Serializable
         return self::withData(
             UserId::fromString($data['id']),
             Name::fromString($data['name']),
-            LastName::fromString($data['lastname']),
+            Lastname::fromString($data['lastname']),
             new Credentials(Email::fromString($data['email']), HashedPassword::fromHash($data['hashedPassword'])),
             CreationDate::fromString($data['creationDate'])
         );

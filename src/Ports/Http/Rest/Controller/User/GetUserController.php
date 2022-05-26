@@ -31,6 +31,6 @@ final class GetUserController extends QueryController
         Assertion::uuid($id, 'Not a valid id');
 
         $user = $this->ask(GetQuery::withData($id));
-        return $this->jsonResponse(['id' => $id]);
+        return $this->jsonResponse($user);
     }
 }

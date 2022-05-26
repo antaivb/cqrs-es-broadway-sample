@@ -7,6 +7,7 @@
     <entity name="App\Infrastructure\User\ReadModel\UserView" table="user">
         <id name="id" type="user_id" column="id"/>
         <field name="name" type="name" column="name"/>
+        <field name="lastname" type="lastname" column="lastname"/>
         <field name="creationDate" type="creation_date" column="creation_date"/>
         <field name="email" type="email" column="email"/>
         <embedded name="hashedPassword" class="App\Domain\User\Model\ValueObject\Auth\HashedPassword" use-column-prefix="false"/>

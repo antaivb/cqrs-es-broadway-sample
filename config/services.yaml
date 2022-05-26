@@ -93,3 +93,8 @@ services:
             - 'events'
             - false
             - '@broadway.uuid.converter'
+
+    App\Infrastructure\Shared\Persistence\DBALSnapshotEventStore:
+        arguments:
+            - '@doctrine.dbal.default_connection'
+            - 'snapshots'
