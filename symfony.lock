@@ -32,9 +32,6 @@
             "config/packages/broadway_event_store_dbal.yaml"
         ]
     },
-    "broadway/snapshotting": {
-        "version": "0.3.0"
-    },
     "broadway/uuid-generator": {
         "version": "1.0.0"
     },
@@ -507,9 +504,6 @@
             "config/packages/routing.yaml",
             "config/routes.yaml"
         ]
-    },
-    "symfony/serializer": {
-        "version": "v5.4.8"
     },
     "symfony/service-contracts": {
         "version": "v2.5.1"
