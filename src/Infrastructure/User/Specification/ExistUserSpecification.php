@@ -14,12 +14,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class ExistUserSpecification extends AbstractSpecification implements ExistUserSpecificationInterface
 {
-    private UserRepositoryInterface $userRepository;
-
-    public function __construct(UserRepositoryInterface $userRepository)
-    {
-        $this->userRepository = $userRepository;
-    }
+    public function __construct(
+        private UserRepositoryInterface $userRepository
+    ) {}
 
     public function exist(UserId $id): void
     {

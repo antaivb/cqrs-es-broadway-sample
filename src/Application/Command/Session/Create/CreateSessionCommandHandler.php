@@ -6,23 +6,19 @@ namespace App\Application\Command\Session\Create;
 
 use App\Application\Command\Shared\CommandHandlerInterface;
 use App\Domain\Session\Model\Session;
+use App\Domain\Session\Model\ValueObject\NumBookings;
 use App\Domain\Session\Model\ValueObject\SessionId;
 use App\Domain\Session\Model\ValueObject\Status\StatusFactory;
 use App\Domain\Session\Repository\SessionStoreRepositoryInterface;
 use App\Domain\Session\Specification\UniqueSessionSpecificationInterface;
+use App\Domain\Shared\ValueObject\UpdatedAt;
 
 final class CreateSessionCommandHandler implements CommandHandlerInterface
 {
-    private SessionStoreRepositoryInterface $sessionStoreRepository;
-    private UniqueSessionSpecificationInterface $uniqueSessionSpecification;
-
     public function __construct(
-        SessionStoreRepositoryInterface $sessionStoreRepository,
-        UniqueSessionSpecificationInterface $uniqueSessionSpecification
-    ) {
-        $this->sessionStoreRepository = $sessionStoreRepository;
-        $this->uniqueSessionSpecification = $uniqueSessionSpecification;
-    }
+        private SessionStoreRepositoryInterface $sessionStoreRepository,
+        private UniqueSessionSpecificationInterface $uniqueSessionSpecification
+    ) {}
 
     public function __invoke(CreateSessionCommand $command): void
     {
@@ -32,9 +28,9 @@ final class CreateSessionCommandHandler implements CommandHandlerInterface
             $command->duration(),
             $command->meeting(),
             StatusFactory::makeEnabled(),
-            $command->vilmaClassId(),
-            null,
+            UpdatedAt::empty(),
             $command->maxParticipants(),
+            NumBookings::initialize(),
             $this->uniqueSessionSpecification
         );
 

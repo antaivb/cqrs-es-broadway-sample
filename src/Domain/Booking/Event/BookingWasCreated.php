@@ -10,7 +10,6 @@ use App\Domain\User\Model\ValueObject\UserId;
 use App\Domain\Shared\ValueObject\CreationDate;
 use Broadway\Serializer\Serializable;
 use JetBrains\PhpStorm\ArrayShape;
-use JetBrains\PhpStorm\Pure;
 
 final class BookingWasCreated implements Serializable
 {
@@ -24,7 +23,7 @@ final class BookingWasCreated implements Serializable
 
     protected function __construct() {}
 
-    #[Pure] public static function withData(
+    public static function withData(
         BookingId $id,
         UserId $userId,
         SessionId $sessionId,

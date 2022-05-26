@@ -14,16 +14,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class RestoreUserCommand extends Command
 {
-    private DBALEventStore $eventStoreManagement;
-    private UserRepositoryInterface $userRepository;
-
     public function __construct(
-        DBALEventStore $eventStoreManagement,
-        UserRepositoryInterface $userRepository
+        private DBALEventStore $eventStoreManagement,
+        private UserRepositoryInterface $userRepository
     ) {
         parent::__construct();
-        $this->eventStoreManagement = $eventStoreManagement;
-        $this->userRepository = $userRepository;
     }
 
     protected function configure(): void
@@ -33,8 +28,8 @@ class RestoreUserCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $replayer = new Replayer($this->eventStoreManagement, $this->userRepository);
-        $replayer->replayForEvent([UserWasCreated::class]);
+        $replayed = new Replayer($this->eventStoreManagement, $this->userRepository);
+        $replayed->replayForEvent([UserWasCreated::class]);
 
         return Command::SUCCESS;
     }

@@ -11,13 +11,9 @@ use Broadway\ReadModel\Projector;
 
 final class SessionProjection extends Projector
 {
-    private SessionRepositoryInterface $sessionRepository;
-
     public function __construct(
-        SessionRepositoryInterface $sessionRepository,
-    ) {
-        $this->sessionRepository = $sessionRepository;
-    }
+        private SessionRepositoryInterface $sessionRepository,
+    ) {}
 
     protected function applySessionWasCreated(SessionWasCreated $sessionWasCreated): void
     {

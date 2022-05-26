@@ -13,12 +13,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class UniqueSessionSpecification extends AbstractSpecification implements UniqueSessionSpecificationInterface
 {
-    private SessionRepositoryInterface $sessionRepository;
-
-    public function __construct(SessionRepositoryInterface $sessionRepository)
-    {
-        $this->sessionRepository = $sessionRepository;
-    }
+    public function __construct(
+        private SessionRepositoryInterface $sessionRepository
+    ) {}
 
     public function isUnique(SessionId $id): void
     {

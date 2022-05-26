@@ -11,16 +11,10 @@ use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 #[AsMessageHandler]
 class BookingConfirmationProcessManager
 {
-    private LoggerInterface $logger;
-    private SessionRepositoryInterface $sessionRepository;
-
     public function __construct(
-        SessionRepositoryInterface $sessionRepository,
-        LoggerInterface $logger
-    ) {
-        $this->sessionRepository = $sessionRepository;
-        $this->logger = $logger;
-    }
+        private SessionRepositoryInterface $sessionRepository,
+        private LoggerInterface $logger
+    ) {}
 
     #[NoReturn] public function __invoke(BookingWasCreated $bookingsWasCreated): void
     {

@@ -6,12 +6,14 @@ namespace App\Application\Command\Booking\Create;
 
 use App\Application\Command\Shared\CommandInterface;
 use App\Domain\Session\Model\ValueObject\SessionId;
+use App\Domain\Shared\ValueObject\Price;
 use App\Domain\User\Model\ValueObject\UserId;
 
 final class CreateBookingCommand implements CommandInterface
 {
     private UserId $userId;
     private SessionId $sessionId;
+    private Price $price;
     private bool $sendConfirmation;
 
     protected function __constructor(){}
@@ -26,6 +28,7 @@ final class CreateBookingCommand implements CommandInterface
         $command->userId = UserId::fromString($userId);
         $command->sessionId = SessionId::fromString($sessionId);
         $command->sendConfirmation = $sendConfirmation;
+        $command->price = Price::fromString(1, 'EUR');
 
         return $command;
     }
@@ -43,5 +46,10 @@ final class CreateBookingCommand implements CommandInterface
     public function sendConfirmation(): bool
     {
         return $this->sendConfirmation;
+    }
+
+    public function price(): Price
+    {
+        return $this->price;
     }
 }

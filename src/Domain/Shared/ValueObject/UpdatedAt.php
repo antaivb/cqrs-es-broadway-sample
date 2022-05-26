@@ -31,11 +31,20 @@ class UpdatedAt implements \JsonSerializable
         return self::fromFormat($date, self::FORMAT);
     }
 
+    public static function fromStringOrNull(?string $date): self
+    {
+        if (empty($date)) {
+            return self::empty();
+        }
+
+        return self::fromFormat($date, self::FORMAT);
+    }
+
     public static function fromFormat(string $date, string $format): self
     {
         Assertion::date($date, $format, 'Not a valid date');
 
-        $datetime = new self();
+        $datetime = new self(null);
         $datetime->updatedAt = new DateTime($date);
 
         return $datetime;
@@ -43,7 +52,7 @@ class UpdatedAt implements \JsonSerializable
 
     public static function generate(): self
     {
-        $datetime = new self();
+        $datetime = new self(null);
         $datetime->updatedAt = new DateTime();
 
         return $datetime;
@@ -51,7 +60,7 @@ class UpdatedAt implements \JsonSerializable
 
     public static function empty(): self
     {
-        return new self();
+        return new self(null);
     }
 
     public function __toString(): string

@@ -3,12 +3,16 @@
 namespace App\Domain\Session\Model;
 
 use App\Domain\Session\Event\SessionWasCreated;
+use App\Domain\Session\Model\ValueObject\Duration;
+use App\Domain\Session\Model\ValueObject\MaxParticipants;
 use App\Domain\Session\Model\ValueObject\Meeting;
+use App\Domain\Session\Model\ValueObject\NumBookings;
 use App\Domain\Session\Model\ValueObject\SessionId;
 use App\Domain\Session\Model\ValueObject\Status\Status;
 use App\Domain\Session\Specification\UniqueSessionSpecificationInterface;
 use App\Domain\Shared\ValueObject\CreationDate;
-use App\Domain\VilmaClass\Model\ValueObject\VilmaClassId;
+use App\Domain\Shared\ValueObject\UpdatedAt;
+use App\Domain\Shared\ValueObject\When;
 use Broadway\EventSourcing\EventSourcedAggregateRoot;
 use JetBrains\PhpStorm\Pure;
 
@@ -16,28 +20,26 @@ class Session extends EventSourcedAggregateRoot
 {
     private SessionId $id;
     private CreationDate $creationDate;
-    private ?\DateTimeInterface $updatedAt;
-    private \DateTimeInterface $when;
-    private int $duration;
+    private UpdatedAt $updatedAt;
+    private When $when;
+    private Duration $duration;
     private ?Meeting $meeting;
     private Status $status;
-    private ?VilmaClassId $vilmaClassId;
-    private int $maxParticipants;
-    private int $numBookings;
+    private MaxParticipants $maxParticipants;
+    private NumBookings $numBookings;
 
     protected function __construct() {}
 
     public static function create(
         SessionId $id,
-        \DateTimeInterface $when,
-        int $duration,
+        When $when,
+        Duration $duration,
         ?Meeting $meeting,
         Status $status,
-        ?VilmaClassId $vilmaClassId,
-        ?\DateTimeInterface $updatedAt,
-        int $maxParticipants,
+        UpdatedAt $updatedAt,
+        MaxParticipants $maxParticipants,
+        NumBookings $numBookings,
         UniqueSessionSpecificationInterface $uniqueSessionSpecification,
-        int $numBookings = 0,
     ): self {
         $uniqueSessionSpecification->isUnique($id);
 
@@ -48,7 +50,6 @@ class Session extends EventSourcedAggregateRoot
             $duration,
             $meeting,
             $status,
-            $vilmaClassId,
             CreationDate::generate(),
             $updatedAt,
             $maxParticipants,
@@ -65,7 +66,6 @@ class Session extends EventSourcedAggregateRoot
         $this->duration = $sessionWasCreated->duration();
         $this->meeting = $sessionWasCreated->meeting();
         $this->status = $sessionWasCreated->status();
-        $this->vilmaClassId = $sessionWasCreated->vilmaClassId();
         $this->creationDate = $sessionWasCreated->creationDate();
         $this->updatedAt = $sessionWasCreated->updatedAt();
         $this->maxParticipants = $sessionWasCreated->maxParticipants();
@@ -82,12 +82,12 @@ class Session extends EventSourcedAggregateRoot
         return $this->id;
     }
 
-    public function when(): \DateTimeInterface
+    public function when(): When
     {
         return $this->when;
     }
 
-    public function duration(): int
+    public function duration(): Duration
     {
         return $this->duration;
     }
@@ -102,27 +102,22 @@ class Session extends EventSourcedAggregateRoot
         return $this->status;
     }
 
-    public function vilmaClassId(): ?VilmaClassId
-    {
-        return $this->vilmaClassId;
-    }
-
     public function creationDate(): CreationDate
     {
         return $this->creationDate;
     }
 
-    public function updatedAt(): ?\DateTimeInterface
+    public function updatedAt(): UpdatedAt
     {
         return $this->updatedAt;
     }
 
-    public function maxParticipants(): int
+    public function maxParticipants(): MaxParticipants
     {
         return $this->maxParticipants;
     }
 
-    public function numBookings(): int
+    public function numBookings(): NumBookings
     {
         return $this->numBookings;
     }

@@ -32,14 +32,12 @@ final class SessionController extends CommandQueryController
         $duration = (int) $request->get('duration');
         $meetingUrl = $request->get('meetingUrl');
         $meetingHostUrl = $request->get('meetingHostUrl');
-        $vilmaClassId = $request->get('vilmaClassId');
         $maxParticipants = (int) $request->get('maxParticipants');
         $when = $request->get('when');
 
         Assertion::integer($duration, 'Integer needed');
         Assertion::url($meetingUrl, 'Invalid url');
         Assertion::url($meetingHostUrl, 'Invalid url');
-        Assertion::uuid($vilmaClassId, 'Invalid id');
         Assertion::integer($maxParticipants, 'Integer needed');
         Assertion::date($when, 'Y-m-d H:i:s', 'Is not a valid date');
 
@@ -47,11 +45,10 @@ final class SessionController extends CommandQueryController
             $duration,
             $meetingUrl,
             $meetingHostUrl,
-            $vilmaClassId,
             $maxParticipants,
             $when
         ));
 
-        return $this->jsonResponse(['vilmaClassId' => $vilmaClassId]);
+        return $this->jsonResponse(['status' => 'ok']);
     }
 }

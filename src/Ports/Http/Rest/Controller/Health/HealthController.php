@@ -20,10 +20,9 @@ final class HealthController extends QueryController
      * )
      *
      * @OA\Tag(name="Health")
-     * @param Request $request
      * @return JsonResponse
      */
-    public function ping(Request $request): JsonResponse
+    public function ping(): JsonResponse
     {
         return $this->jsonResponse(['pong']);
     }

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Ports\Http\Rest\EventSubscriber;
 
 use Assert\InvalidArgumentException;
+use JetBrains\PhpStorm\ArrayShape;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,6 +26,7 @@ final class ExceptionSubscriber implements EventSubscriberInterface
         $this->exceptionToStatus = $exceptionToStatus;
     }
 
+    #[ArrayShape([KernelEvents::EXCEPTION => "string"])]
     public static function getSubscribedEvents(): array
     {
         return [

@@ -14,16 +14,10 @@ final class MessengerAsyncEventBus
 {
     use MessageBusExceptionTrait;
 
-    private MessageBusInterface $messageBus;
-    private LoggerInterface $logger;
-
     public function __construct(
-        MessageBusInterface $messageBus,
-        LoggerInterface $logger
-    ) {
-        $this->messageBus = $messageBus;
-        $this->logger = $logger;
-    }
+        private MessageBusInterface $messageBus,
+        private LoggerInterface $logger
+    ) {}
 
     public function dispatch(DomainMessage $command): void
     {

@@ -2,49 +2,49 @@
 
 namespace App\Domain\Session\Event;
 
+use App\Domain\Session\Model\ValueObject\Duration;
+use App\Domain\Session\Model\ValueObject\MaxParticipants;
 use App\Domain\Session\Model\ValueObject\Meeting;
+use App\Domain\Session\Model\ValueObject\NumBookings;
 use App\Domain\Session\Model\ValueObject\SessionId;
 use App\Domain\Session\Model\ValueObject\Status\Status;
 use App\Domain\Shared\ValueObject\CreationDate;
-use App\Domain\VilmaClass\Model\ValueObject\VilmaClassId;
+use App\Domain\Shared\ValueObject\UpdatedAt;
+use App\Domain\Shared\ValueObject\When;
 use Broadway\Serializer\Serializable;
-use JetBrains\PhpStorm\Pure;
 
 final class SessionWasCreated implements Serializable
 {
     private SessionId $id;
     private ?Meeting $meeting;
     private Status $status;
-    private ?VilmaClassId $vilmaClassId;
     private CreationDate $creationDate;
-    private \DateTimeInterface $when;
-    private ?\DateTimeInterface $updatedAt;
-    private int $duration;
-    private int $maxParticipants;
-    private int $numBookings;
+    private When $when;
+    private UpdatedAt $updatedAt;
+    private Duration $duration;
+    private MaxParticipants $maxParticipants;
+    private NumBookings $numBookings;
 
     protected function __construct() {}
 
-    #[Pure] public static function withData(
+    public static function withData(
         SessionId $id,
-        \DateTimeInterface $when,
-        int $duration,
+        When $when,
+        Duration $duration,
         ?Meeting $meeting,
         Status $status,
-        ?VilmaClassId $vilmaClassId,
         CreationDate $creationDate,
-        ?\DateTimeInterface $updatedAt,
-        int $maxParticipants,
-        int $numBookings
+        UpdatedAt $updatedAt,
+        MaxParticipants $maxParticipants,
+        NumBookings $numBookings
     ): self {
         $session = new self();
 
         $session->id = $id;
         $session->when = $when;
         $session->duration = $duration;
-        $session->meeting = $meeting;
         $session->status = $status;
-        $session->vilmaClassId = $vilmaClassId;
+        $session->meeting = $meeting;
         $session->creationDate = $creationDate;
         $session->updatedAt = $updatedAt;
         $session->maxParticipants = $maxParticipants;
@@ -62,9 +62,8 @@ final class SessionWasCreated implements Serializable
             'meetingUrl' => $this->meeting()->url(),
             'meetingHostUrl' => $this->meeting()->hostUrl(),
             'status' => $this->status()->status(),
-            'vilmaClassId' => $this->vilmaClassId()->toString(),
             'creationDate' => $this->creationDate()->toString(),
-            'updatedAt' => (!empty($this->updatedAt())) ? $this->updatedAt()->format('Y-m-d') : null,
+            'updatedAt' => $this->updatedAt(),
             'maxParticipants' => $this->maxParticipants(),
             'numBookings' => $this->numBookings()
         ];
@@ -74,13 +73,12 @@ final class SessionWasCreated implements Serializable
     {
         return self::withData(
             SessionId::fromString($data['id']),
-            new \DateTime($data['when']),
+            When::fromString($data['when']),
             $data['duration'],
             Meeting::fromString($data['meetingUrl'], $data['meetingHostUrl']),
             Status::fromInt($data['status']),
-            VilmaClassId::fromString($data['vilmaClassId']),
             CreationDate::fromString($data['creationDate']),
-            new \DateTime($data['updatedAt']),
+            UpdatedAt::fromStringOrNull($data['updatedAt']),
             $data['maxParticipants'],
             $data['numBookings']
         );
@@ -91,12 +89,12 @@ final class SessionWasCreated implements Serializable
         return $this->id;
     }
 
-    public function when(): \DateTimeInterface
+    public function when(): When
     {
         return $this->when;
     }
 
-    public function duration(): int
+    public function duration(): Duration
     {
         return $this->duration;
     }
@@ -111,27 +109,22 @@ final class SessionWasCreated implements Serializable
         return $this->status;
     }
 
-    public function vilmaClassId(): ?VilmaClassId
-    {
-        return $this->vilmaClassId;
-    }
-
     public function creationDate(): CreationDate
     {
         return $this->creationDate;
     }
 
-    public function updatedAt(): ?\DateTimeInterface
+    public function updatedAt(): UpdatedAt
     {
         return $this->updatedAt;
     }
 
-    public function maxParticipants(): int
+    public function maxParticipants(): MaxParticipants
     {
         return $this->maxParticipants;
     }
 
-    public function numBookings(): int
+    public function numBookings(): NumBookings
     {
         return $this->numBookings;
     }

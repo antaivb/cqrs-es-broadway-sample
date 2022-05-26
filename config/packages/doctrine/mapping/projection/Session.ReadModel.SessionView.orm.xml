@@ -6,13 +6,13 @@
 
     <entity name="App\Infrastructure\Session\ReadModel\SessionView" table="session">
         <id name="id" type="session_id" column="id"/>
-        <field name="duration" type="integer" />
+        <field name="duration" type="duration" column="duration" />
         <field name="status" type="status" column="status" />
         <field name="creationDate" type="creation_date" column="creation_date"/>
         <field name="when" type="when" column="`when`" />
         <field name="updatedAt" type="updated_at" nullable="true" column="updated_at" />
-        <field name="maxParticipants" type="integer" column="max_participants"/>
-        <field name="numBookings" type="integer" column="num_bookings" />
+        <field name="maxParticipants" type="max_participants" column="max_participants"/>
+        <field name="numBookings" type="num_bookings" column="num_bookings" />
         <embedded name="meeting" class="App\Domain\Session\Model\ValueObject\Meeting" use-column-prefix="false"/>
     </entity>
 

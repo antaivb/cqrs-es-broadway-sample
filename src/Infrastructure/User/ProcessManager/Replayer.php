@@ -15,16 +15,10 @@ use JetBrains\PhpStorm\Pure;
 
 class Replayer implements EventVisitor
 {
-    private DBALEventStore $eventStore;
-    private UserRepositoryInterface $userRepository;
-
     public function __construct(
-        DBALEventStore $eventStore,
-        UserRepositoryInterface $userRepository
-    ) {
-        $this->eventStore = $eventStore;
-        $this->userRepository = $userRepository;
-    }
+        private DBALEventStore $eventStore,
+        private UserRepositoryInterface $userRepository
+    ) {}
 
     public function doWithEvent(DomainMessage $domainMessage): void
     {

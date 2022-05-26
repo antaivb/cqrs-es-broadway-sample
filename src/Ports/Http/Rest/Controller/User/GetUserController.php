@@ -18,7 +18,7 @@ final class GetUserController extends QueryController
     /**
      * @Route(
      *     "/user/{id}",
-     *     name="get_yser",
+     *     name="get_user",
      *     methods={"GET"}
      * )
      *

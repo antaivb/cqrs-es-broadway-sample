@@ -13,12 +13,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class ExistSessionSpecification extends AbstractSpecification implements ExistSessionSpecificationInterface
 {
-    private SessionRepositoryInterface $sessionRepository;
-
-    public function __construct(SessionRepositoryInterface $sessionRepository)
-    {
-        $this->sessionRepository = $sessionRepository;
-    }
+    public function __construct(
+        private SessionRepositoryInterface $sessionRepository
+    ) {}
 
     public function exist(SessionId $id): void
     {
@@ -30,7 +27,6 @@ final class ExistSessionSpecification extends AbstractSpecification implements E
         try {
             $this->sessionRepository->find($value);
         } catch (NotFoundHttpException $e) {
-            var_dump($e->getMessage()); die;
             throw new SessionNotFoundException();
         }
     }

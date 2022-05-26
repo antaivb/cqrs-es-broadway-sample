@@ -6,12 +6,9 @@ use App\Domain\Shared\Upcasting\UpcasterChain;
 
 final class SequentialUpcasterChain implements UpcasterChain
 {
-    private array $upcasters;
-
-    public function __construct(array $upcasters)
-    {
-        $this->upcasters = $upcasters;
-    }
+    public function __construct(
+        private array $upcasters
+    ) {}
 
     public function upcast(array $serializedEvent, int $playhead): array
     {

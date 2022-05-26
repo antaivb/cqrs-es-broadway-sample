@@ -16,16 +16,10 @@ final class DomainEventPublisher implements EventSubscriberInterface, EventListe
 {
     private array $messages = [];
 
-    private LoggerInterface $logger;
-    private MessengerAsyncEventBus $bus;
-
     public function __construct(
-        LoggerInterface $logger,
-        MessengerAsyncEventBus $bus
-    ) {
-        $this->bus = $bus;
-        $this->logger = $logger;
-    }
+        private LoggerInterface $logger,
+        private MessengerAsyncEventBus $bus
+    ) {}
 
     public function handle(DomainMessage $domainMessage): void
     {

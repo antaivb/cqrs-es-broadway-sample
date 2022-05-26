@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Infrastructure\Shared\Bus\Query;
 
-use App\Application\Query\Shared\Collection;
-use App\Application\Query\Shared\Item;
 use App\Application\Query\Shared\QueryBusInterface;
 use App\Application\Query\Shared\QueryInterface;
 use App\Infrastructure\Shared\Bus\MessageBusExceptionTrait;
@@ -18,12 +16,9 @@ final class MessengerQueryBus implements QueryBusInterface
 {
     use MessageBusExceptionTrait;
 
-    private MessageBusInterface $messageBus;
-
-    public function __construct(MessageBusInterface $messageBus)
-    {
-        $this->messageBus = $messageBus;
-    }
+    public function __construct(
+        private MessageBusInterface $messageBus
+    ) {}
 
     /**
      * @throws Throwable

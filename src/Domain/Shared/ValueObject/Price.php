@@ -27,4 +27,9 @@ class Price
     {
         return $this->money->equals($price->money);
     }
+
+    public function money(): Money
+    {
+        return $this->money;
+    }
 }

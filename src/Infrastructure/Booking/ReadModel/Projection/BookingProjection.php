@@ -13,19 +13,11 @@ use Broadway\ReadModel\Projector;
 
 final class BookingProjection extends Projector
 {
-    private BookingRepositoryInterface $bookingRepository;
-    private SessionRepositoryInterface $sessionRepository;
-    private UserRepositoryInterface $userRepository;
-
     public function __construct(
-        BookingRepositoryInterface $bookingRepository,
-        SessionRepositoryInterface $sessionRepository,
-        UserRepositoryInterface $userRepository
-    ) {
-        $this->bookingRepository = $bookingRepository;
-        $this->sessionRepository = $sessionRepository;
-        $this->userRepository = $userRepository;
-    }
+        private BookingRepositoryInterface $bookingRepository,
+        private SessionRepositoryInterface $sessionRepository,
+        private UserRepositoryInterface $userRepository
+    ) {}
 
     protected function applyBookingWasCreated(BookingWasCreated $bookingWasCreated): void
     {

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7e660976aaac47100f64e478d485bced",
+    "content-hash": "19ddfb76a4b8dd68f9aa23c4f079fa51",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -312,16 +312,16 @@
         },
         {
             "name": "broadway/event-store-dbal",
-            "version": "dev-upcasting",
+            "version": "0.6.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/antaivb/event-store-dbal.git",
-                "reference": "49d4934560bf45d2aa38de1fdb4141b230abe97b"
+                "url": "https://github.com/broadway/event-store-dbal.git",
+                "reference": "7cc0b51cdd8312c4f8919d3b2f6688d85b65cc58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/antaivb/event-store-dbal/zipball/49d4934560bf45d2aa38de1fdb4141b230abe97b",
-                "reference": "49d4934560bf45d2aa38de1fdb4141b230abe97b",
+                "url": "https://api.github.com/repos/broadway/event-store-dbal/zipball/7cc0b51cdd8312c4f8919d3b2f6688d85b65cc58",
+                "reference": "7cc0b51cdd8312c4f8919d3b2f6688d85b65cc58",
                 "shasum": ""
             },
             "require": {
@@ -347,11 +347,7 @@
                     "Broadway\\EventStore\\Dbal\\": "src/"
                 }
             },
-            "autoload-dev": {
-                "psr-4": {
-                    "Broadway\\EventStore\\Dbal\\": "test/"
-                }
-            },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -383,9 +379,10 @@
             ],
             "description": "Event store implementation using doctrine/dbal",
             "support": {
-                "source": "https://github.com/antaivb/event-store-dbal/tree/upcasting"
+                "issues": "https://github.com/broadway/event-store-dbal/issues",
+                "source": "https://github.com/broadway/event-store-dbal/tree/0.6.0"
             },
-            "time": "2022-05-16T10:27:52+00:00"
+            "time": "2021-06-24T09:42:53+00:00"
         },
         {
             "name": "broadway/uuid-generator",
@@ -9269,18 +9266,9 @@
             "time": "2021-07-28T10:34:58+00:00"
         }
     ],
-    "aliases": [
-        {
-            "package": "broadway/event-store-dbal",
-            "version": "dev-upcasting",
-            "alias": "0.6.0",
-            "alias_normalized": "0.6.0.0"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "broadway/event-store-dbal": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {

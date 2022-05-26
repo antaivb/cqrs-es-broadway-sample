@@ -2,13 +2,15 @@
 
 namespace App\Infrastructure\Session\ReadModel;
 
+use App\Domain\Session\Model\ValueObject\Duration;
+use App\Domain\Session\Model\ValueObject\MaxParticipants;
 use App\Domain\Session\Model\ValueObject\Meeting;
+use App\Domain\Session\Model\ValueObject\NumBookings;
 use App\Domain\Session\Model\ValueObject\SessionId;
 use App\Domain\Session\Model\ValueObject\Status\Status;
 use App\Domain\Shared\ValueObject\CreationDate;
 use App\Domain\Shared\ValueObject\UpdatedAt;
 use App\Domain\Shared\ValueObject\When;
-use App\Domain\VilmaClass\Model\ValueObject\VilmaClassId;
 use Broadway\ReadModel\SerializableReadModel;
 use JetBrains\PhpStorm\Pure;
 
@@ -18,26 +20,24 @@ class SessionView implements SerializableReadModel
     private CreationDate $creationDate;
     private UpdatedAt $updatedAt;
     private When $when;
-    private int $duration;
+    private Duration $duration;
     private ?Meeting $meeting;
     private Status $status;
-    private ?VilmaClassId $vilmaClassId = null;
-    private int $maxParticipants;
-    private int $numBookings;
+    private MaxParticipants $maxParticipants;
+    private NumBookings $numBookings;
 
     protected function __construct() {}
 
     #[Pure] public static function withData(
         SessionId $id,
         When $when,
-        int $duration,
+        Duration $duration,
         ?Meeting $meeting,
         Status $status,
-        ?VilmaClassId $vilmaClassId,
         CreationDate $creationDate,
         UpdatedAt $updatedAt,
-        int $maxParticipants,
-        int $numBookings
+        MaxParticipants $maxParticipants,
+        NumBookings $numBookings
     ): self {
         $session = new self();
 
@@ -46,7 +46,6 @@ class SessionView implements SerializableReadModel
         $session->duration = $duration;
         $session->meeting = $meeting;
         $session->status = $status;
-        $session->vilmaClassId = $vilmaClassId;
         $session->creationDate = $creationDate;
         $session->updatedAt = $updatedAt;
         $session->maxParticipants = $maxParticipants;
@@ -74,7 +73,7 @@ class SessionView implements SerializableReadModel
         return $this->updatedAt;
     }
 
-    public function duration(): int
+    public function duration(): Duration
     {
         return $this->duration;
     }
@@ -89,22 +88,17 @@ class SessionView implements SerializableReadModel
         return $this->status;
     }
 
-    public function vilmaClassId(): ?VilmaClassId
-    {
-        return $this->vilmaClassId;
-    }
-
     public function creationDate(): CreationDate
     {
         return $this->creationDate;
     }
 
-    public function maxParticipants(): int
+    public function maxParticipants(): MaxParticipants
     {
         return $this->maxParticipants;
     }
 
-    public function numBookings(): int
+    public function numBookings(): NumBookings
     {
         return $this->numBookings;
     }
@@ -116,7 +110,7 @@ class SessionView implements SerializableReadModel
 
     public function incrementNumBookings(): void
     {
-        $this->numBookings += 1;
+        $this->numBookings->increment();
     }
 
     public function serialize(): array
@@ -128,7 +122,6 @@ class SessionView implements SerializableReadModel
             'meetingUrl' => $this->meeting()->url(),
             'meetingHostUrl' => $this->meeting()->hostUrl(),
             'status' => $this->status()->status(),
-            'vilmaClassId' => (!empty($this->vilmaClassId())) ? $this->vilmaClassId()->toString() : null,
             'creationDate' => $this->creationDate()->toString(),
             'updatedAt' => $this->updatedAt()->toString(),
             'maxParticipants' => $this->maxParticipants(),
@@ -144,9 +137,8 @@ class SessionView implements SerializableReadModel
             $data['duration'],
             Meeting::fromString($data['meetingUrl'], $data['meetingHostUrl']),
             Status::fromInt($data['status']),
-            (!empty($data['vilmaClassId'])) ? VilmaClassId::fromString($data['vilmaClassId']) : null,
             CreationDate::fromString($data['creationDate']),
-            (!empty($data['updatedAt'])) ? UpdatedAt::fromString($data['updatedAt']) : UpdatedAt::empty(),
+            UpdatedAt::fromStringOrNull($data['updatedAt']),
             $data['maxParticipants'],
             $data['numBookings']
         );

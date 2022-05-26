@@ -21,6 +21,9 @@ doctrine:
             when: App\Infrastructure\Shared\Persistence\Doctrine\Type\WhenType
             unsubscribed_at: App\Infrastructure\Booking\Persistence\Doctrine\Type\UnsubscribedAtType
             status: App\Infrastructure\Session\Persistence\Doctrine\Type\StatusType
+            duration: App\Infrastructure\Session\Persistence\Doctrine\Type\DurationType
+            max_participants: App\Infrastructure\Session\Persistence\Doctrine\Type\MaxParticipantsType
+            num_bookings: App\Infrastructure\Session\Persistence\Doctrine\Type\NumBookingsType
 
     orm:
         auto_generate_proxy_classes: true

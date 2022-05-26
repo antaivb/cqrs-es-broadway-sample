@@ -15,12 +15,9 @@ final class MessengerCommandBus implements CommandBusInterface
 {
     use MessageBusExceptionTrait;
 
-    private MessageBusInterface $messageBus;
-
-    public function __construct(MessageBusInterface $messageBus)
-    {
-        $this->messageBus = $messageBus;
-    }
+    public function __construct(
+        private MessageBusInterface $messageBus
+    ) {}
 
     /**
      * @throws Throwable

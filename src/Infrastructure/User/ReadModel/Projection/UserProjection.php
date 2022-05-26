@@ -11,13 +11,9 @@ use Broadway\ReadModel\Projector;
 
 final class UserProjection extends Projector
 {
-    private UserRepositoryInterface $userRepository;
-
     public function __construct(
-        UserRepositoryInterface $userRepository
-    ) {
-        $this->userRepository = $userRepository;
-    }
+        private UserRepositoryInterface $userRepository
+    ) {}
 
     protected function applyUserWasCreated(UserWasCreated $userWasCreated): void
     {

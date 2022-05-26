@@ -12,6 +12,7 @@ final class GetQuery implements QueryInterface
     private UserId $id;
 
     protected function __construct() {}
+
     public static function withData(
         string $id
     ): self

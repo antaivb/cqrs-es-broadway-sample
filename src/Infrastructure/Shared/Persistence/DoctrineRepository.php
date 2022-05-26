@@ -13,12 +13,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 abstract class DoctrineRepository
 {
-    private EntityManagerInterface $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
+    public function __construct(
+        private EntityManagerInterface $entityManager
+    ) {}
 
     protected function entityManager(): EntityManagerInterface
     {

@@ -13,12 +13,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class UniqueBookingSpecification extends AbstractSpecification implements UniqueBookingSpecificationInterface
 {
-    private BookingRepositoryInterface $bookingRepository;
-
-    public function __construct(BookingRepositoryInterface $bookingRepository)
-    {
-        $this->bookingRepository = $bookingRepository;
-    }
+    public function __construct(
+        private BookingRepositoryInterface $bookingRepository
+    ) {}
 
     public function isUnique(BookingId $id): void
     {

@@ -61,6 +61,7 @@ class User extends EventSourcedAggregateRoot
         $user->apply(UserWasCreated::withData(
             $id,
             $name,
+            LastName::fromString('a'),
             $credentials,
             CreationDate::generate(),
         ));
@@ -111,35 +112,5 @@ class User extends EventSourcedAggregateRoot
     public function creationDate(): CreationDate
     {
         return $this->creationDate;
-    }
-
-    public function setId(UserId $id): void
-    {
-        $this->id = $id;
-    }
-
-    public function setName(Name $name): void
-    {
-        $this->name = $name;
-    }
-
-    public function setEmail(Email $email): void
-    {
-        $this->email = $email;
-    }
-
-    public function setHashedPassword(HashedPassword $hashedPassword): void
-    {
-        $this->hashedPassword = $hashedPassword;
-    }
-
-    public function setCreationDate(CreationDate $creationDate): void
-    {
-        $this->creationDate = $creationDate;
-    }
-
-    public function setLastname(LastName $lastname): void
-    {
-        $this->lastname = $lastname;
     }
 }

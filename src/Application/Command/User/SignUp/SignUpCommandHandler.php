@@ -12,16 +12,10 @@ use App\Domain\User\Specification\UniqueEmailSpecificationInterface;
 
 final class SignUpCommandHandler implements CommandHandlerInterface
 {
-    private UserStoreRepositoryInterface $userStoreRepository;
-    private UniqueEmailSpecificationInterface $uniqueEmailSpecification;
-
     public function __construct(
-        UniqueEmailSpecificationInterface $uniqueEmailSpecification,
-        UserStoreRepositoryInterface $userStoreRepository
-    ) {
-        $this->uniqueEmailSpecification = $uniqueEmailSpecification;
-        $this->userStoreRepository = $userStoreRepository;
-    }
+        private UniqueEmailSpecificationInterface $uniqueEmailSpecification,
+        private UserStoreRepositoryInterface $userStoreRepository
+    ) {}
 
     public function __invoke(SignUpCommand $command): void
     {

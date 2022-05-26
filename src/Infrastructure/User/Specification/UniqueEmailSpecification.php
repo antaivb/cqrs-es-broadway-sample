@@ -13,12 +13,9 @@ use Doctrine\ORM\NonUniqueResultException;
 
 final class UniqueEmailSpecification extends AbstractSpecification implements UniqueEmailSpecificationInterface
 {
-    private UserRepositoryInterface $userRepository;
-
-    public function __construct(UserRepositoryInterface $userRepository)
-    {
-        $this->userRepository = $userRepository;
-    }
+    public function __construct(
+        private UserRepositoryInterface $userRepository
+    ) {}
 
     public function isUnique(Email $email): void
     {

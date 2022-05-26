@@ -5,45 +5,45 @@ declare(strict_types=1);
 namespace App\Application\Command\Session\Create;
 
 use App\Application\Command\Shared\CommandInterface;
+use App\Domain\Session\Model\ValueObject\Duration;
+use App\Domain\Session\Model\ValueObject\MaxParticipants;
 use App\Domain\Session\Model\ValueObject\Meeting;
-use App\Domain\VilmaClass\Model\ValueObject\VilmaClassId;
+use App\Domain\Shared\ValueObject\When;
 use Assert\Assertion;
-use JetBrains\PhpStorm\Pure;
 
 final class CreateSessionCommand implements CommandInterface
 {
-    private int $duration;
+    private Duration $duration;
     private Meeting $meeting;
-    private VilmaClassId $vilmaClassId;
-    private int $maxParticipants;
-    private \DateTimeInterface $when;
+    private MaxParticipants $maxParticipants;
+    private When $when;
 
     protected function __constructor(){}
 
-    #[Pure] public static function withData(
+    public static function withData(
         int $duration,
         string $meetingUrl,
         string $meetingHostUrl,
-        string $vilmaClassId,
         int $maxParticipants,
         string $when
     ): self {
         Assertion::integer($duration);
         Assertion::integer($maxParticipants);
         Assertion::date($when, 'Y-m-d H:i:s');
+        Assertion::string($meetingUrl);
+        Assertion::string($meetingHostUrl);
 
         $command = new self();
 
-        $command->duration = $duration;
-        $command->maxParticipants = $maxParticipants;
+        $command->duration = Duration::fromInt($duration);
+        $command->maxParticipants = MaxParticipants::fromInt($maxParticipants);
         $command->meeting = Meeting::fromString($meetingUrl, $meetingHostUrl);
-        $command->vilmaClassId = VilmaClassId::fromString($vilmaClassId);
-        $command->when = new \DateTime($when);
+        $command->when = When::fromString($when);
 
         return $command;
     }
 
-    public function duration(): int
+    public function duration(): Duration
     {
         return $this->duration;
     }
@@ -53,17 +53,12 @@ final class CreateSessionCommand implements CommandInterface
         return $this->meeting;
     }
 
-    public function vilmaClassId(): VilmaClassId
-    {
-        return $this->vilmaClassId;
-    }
-
-    public function maxParticipants(): int
+    public function maxParticipants(): MaxParticipants
     {
         return $this->maxParticipants;
     }
 
-    public function when(): \DateTimeInterface
+    public function when(): When
     {
         return $this->when;
     }

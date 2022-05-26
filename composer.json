@@ -3,18 +3,12 @@
     "license": "proprietary",
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "git@github.com:antaivb/event-store-dbal"
-        }
-    ],
     "require": {
         "php": ">=8.0",
         "beberlei/assert": "^3.3",
         "broadway/broadway": "2.4.0",
         "broadway/broadway-bundle": "0.5.*",
-        "broadway/event-store-dbal": "dev-upcasting as 0.6.0",
+        "broadway/event-store-dbal": "0.6.0",
         "doctrine/doctrine-bundle": "^2.1",
         "doctrine/doctrine-migrations-bundle": "^3.0",
         "doctrine/orm": "^2.7",

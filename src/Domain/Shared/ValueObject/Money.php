@@ -10,14 +10,13 @@ class Money
 {
     private float $amount;
     private string $isoCode;
-    # private Currency $currency;
 
     protected function __construct() {}
 
     public static function fromString(float $amount, string $iso): self
     {
         try {
-            Assertion::integer($amount);
+            Assertion::float($amount);
             Assertion::min($amount, 1);
         } catch (AssertionFailedException $e) {
             throw new InvalidPriceException();
@@ -41,13 +40,6 @@ class Money
     {
         return $this->isoCode;
     }
-
-    /*
-    public function currency(): Currency
-    {
-        return $this->currency;
-    }
-    */
 
     public function equals(Money $money): bool
     {

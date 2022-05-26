@@ -11,16 +11,10 @@ use App\Domain\User\Specification\ExistUserSpecificationInterface;
 
 final class GetQueryHandler implements QueryHandlerInterface
 {
-    private UserStoreRepositoryInterface $userStoreRepository;
-    private ExistUserSpecificationInterface $existUserSpecification;
-
     public function __construct(
-        UserStoreRepositoryInterface $userStoreRepository,
-        ExistUserSpecificationInterface $existUserSpecification
-    ) {
-        $this->userStoreRepository = $userStoreRepository;
-        $this->existUserSpecification = $existUserSpecification;
-    }
+        private UserStoreRepositoryInterface $userStoreRepository,
+        private ExistUserSpecificationInterface $existUserSpecification
+    ) {}
 
     public function __invoke(GetQuery $query): User
     {

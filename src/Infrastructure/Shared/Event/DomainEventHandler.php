@@ -12,14 +12,10 @@ use Symfony\Component\Messenger\MessageBusInterface;
 
 final class DomainEventHandler implements MessageSubscriberInterface, EventListener
 {
-    private MessageBusInterface $messageBus;
-    private LoggerInterface $logger;
-
-    public function __construct(MessageBusInterface $messageBus, LoggerInterface $logger)
-    {
-        $this->messageBus = $messageBus;
-        $this->logger = $logger;
-    }
+    public function __construct(
+        private MessageBusInterface $messageBus,
+        private LoggerInterface $logger
+    ) {}
 
     public function handle(DomainMessage $domainMessage): void
     {
