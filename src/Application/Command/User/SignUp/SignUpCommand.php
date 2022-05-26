@@ -21,13 +21,14 @@ final class SignUpCommand implements CommandInterface
 
     public static function withData(
         string $name,
+        string $lastname,
         string $email,
         string $plainPassword,
     ): self {
         $command = new self();
 
         $command->name = Name::fromString($name);
-        $command->lastname = Lastname::fromString($name);
+        $command->lastname = Lastname::fromString($lastname);
         $email = Email::fromString($email);
         $hashedPassword = HashedPassword::encode($plainPassword);
         $command->credentials = new Credentials($email, $hashedPassword);

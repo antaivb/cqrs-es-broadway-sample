@@ -19,7 +19,7 @@ use Doctrine\DBAL\Exception;
 
 class UserStoreRepository extends SnapshottingEventSourcing implements UserStoreRepositoryInterface
 {
-    private const NUM_EVENTS_TO_SNAPSHOT = 2;
+    private const NUM_EVENTS_TO_SNAPSHOT = 10;
 
     public function __construct(
         DBALSnapshotEventStore $snapshotStore,

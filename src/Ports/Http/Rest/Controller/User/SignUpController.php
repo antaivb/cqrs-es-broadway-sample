@@ -32,12 +32,14 @@ final class SignUpController extends CommandQueryController
         $name = $request->get('name');
         $email = $request->get('email');
         $password = $request->get('password');
+        $lastname = $request->get('lastname');
 
         Assertion::notNull($name, 'Name can not be null');
+        Assertion::notNull($lastname, 'Lastname can not be null');
         Assertion::notNull($email, 'Email can not be null');
         Assertion::notNull($password, 'Password can not be null');
 
-        $this->dispatch(SignUpCommand::withData($name, $email, $password));
+        $this->dispatch(SignUpCommand::withData($name, $lastname, $email, $password));
         return $this->jsonResponse(['user' => $email]);
     }
 }
